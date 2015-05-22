@@ -41,4 +41,12 @@ public class ProjectBean {
     public void setSector(String sector) {
         this.sector = sector;
     }
+
+    @Override
+    public String toString() {
+        return "Project{ \n id:"+getId()+"\n"+
+                "name: "+getName()+"\n"+
+                "sector: "+getSector()+"\n }";
+    }
+    
 }

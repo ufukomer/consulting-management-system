@@ -10,6 +10,7 @@ import com.mycompany.consulting.management.system.bean.ProjectBean;
 import com.mycompany.consulting.management.system.dao.ProjectDao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -24,6 +25,7 @@ public class ProjectDaoIml implements ProjectDao {
     Connection conn;
     PreparedStatement prestmt;
     ConnectionControlBean connectionControl;
+    ResultSet result;
     private static final Logger logger = Logger.getLogger(ProjectDaoIml.class.getName());
 
     public ProjectDaoIml() {
@@ -98,7 +100,24 @@ public class ProjectDaoIml implements ProjectDao {
 
     @Override
     public ProjectBean getProjectById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ProjectBean project = null;
+        try {
+            logger.info("Started the getting project from database");
+            
+            String getProjectSql = "Select * from project where id = ?";
+            prestmt = conn.prepareStatement(getProjectSql);
+            prestmt.setInt(1, id);
+            result = prestmt.executeQuery();
+            project = new ProjectBean();
+            while(result.next()){
+                project.setId(result.getInt("id"));
+                project.setName(result.getString("name"));
+                project.setSector(result.getString("sector"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return project;
     }
 
     @Override

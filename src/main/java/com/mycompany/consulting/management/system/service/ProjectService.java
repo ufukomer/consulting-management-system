@@ -37,7 +37,7 @@ public class ProjectService {
     public List<ProjectBean> getAllProjectList(){
         return daoIml.getAllProject();
     }
-    
+  
     
     
 }

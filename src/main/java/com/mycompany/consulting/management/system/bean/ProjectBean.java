@@ -14,6 +14,8 @@ public class ProjectBean {
     private int id;
     private String name;
     private String sector;
+    private int minimumPersonelNumber;
+    private int maximumPersonelNumber;
 
     public ProjectBean() {
     }
@@ -40,6 +42,22 @@ public class ProjectBean {
 
     public void setSector(String sector) {
         this.sector = sector;
+    }
+
+    public int getMinimumPersonelNumber() {
+        return minimumPersonelNumber;
+    }
+
+    public void setMinimumPersonelNumber(int minimumPersonelNumber) {
+        this.minimumPersonelNumber = minimumPersonelNumber;
+    }
+
+    public int getMaximumPersonelNumber() {
+        return maximumPersonelNumber;
+    }
+
+    public void setMaximumPersonelNumber(int maximumPersonelNumber) {
+        this.maximumPersonelNumber = maximumPersonelNumber;
     }
 
     @Override

@@ -6,10 +6,33 @@
 
 package com.mycompany.consulting.management.system.service;
 
+import com.mycompany.consulting.management.system.bean.ProjectBean;
+import com.mycompany.consulting.management.system.dao.imp.ProjectDaoIml;
+
 /**
  *
  * @author MelihKerman
  */
 public class ProjectService {
+    
+    private ProjectDaoIml daoIml;
+
+    public ProjectService() {
+        daoIml = new ProjectDaoIml();
+    }
+    
+    public void addProject(ProjectBean bean){
+        daoIml.addProject(bean);
+    }
+    
+    public void deleteProject(int id){
+        daoIml.deleteProjectById(id);
+    }
+    
+    public ProjectBean getProject(int id){
+        return daoIml.getProjectById(id);
+    }
+    
+    
     
 }

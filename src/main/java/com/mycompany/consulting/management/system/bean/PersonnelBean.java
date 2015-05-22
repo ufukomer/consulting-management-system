@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.mycompany.consulting.management.system.bean;
 
 /**
@@ -11,7 +10,7 @@ package com.mycompany.consulting.management.system.bean;
  * @author MelihKerman
  */
 public class PersonnelBean {
-   
+
     private int id;
     private String name;
     private String surname;
@@ -20,11 +19,22 @@ public class PersonnelBean {
     private String role;
     private int salary;
     private boolean isWorking;
-            
-    
-    public PersonnelBean(){
-        
+
+    public PersonnelBean(int id, String name, String surname, String email, String password, String role, int salary, boolean isWorking) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.salary = salary;
+        this.isWorking = isWorking;
     }
+
+    public PersonnelBean() {
+
+    }
+
     public int getId() {
         return id;
     }
@@ -87,5 +97,15 @@ public class PersonnelBean {
 
     public void setIsWorking(boolean isWorking) {
         this.isWorking = isWorking;
+    }
+    
+    public String toString() {
+        return "\n" + "name: " + name +
+                " surname: " + surname +
+                " email: " + email +
+                " password: " + password + 
+                " role: " + role +
+                " salary: " + salary +
+                " isWorking: " + isWorking;
     }
 }

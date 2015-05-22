@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +29,7 @@ public class CompanyDaoIml implements CompanyDao {
         CompanyBean companyBean=null;
         try {
 
-            String sql = "SELECT * FROM `company` WHERE id='"+id+"'";
+            String sql = "SELECT * FROM company WHERE id='"+id+"'";
 
            Statement stmt=con.createStatement();
            ResultSet rs=stmt.executeQuery(sql);
@@ -46,12 +47,12 @@ public class CompanyDaoIml implements CompanyDao {
 
     @Override
     public List<CompanyBean> getAllCompanies()throws ClassNotFoundException, SQLException {
-        List<CompanyBean> companyList=null;
+        List<CompanyBean> companyList=new ArrayList<CompanyBean>();
           ConnectionControlBean connection = new ConnectionControlBean();
         Connection con = connection.getConnection();
         try {
 
-            String sql = "SELECT * FROM `company` WHERE 1";
+            String sql = "SELECT * FROM company WHERE 1";
 
            Statement stmt=con.createStatement();
            ResultSet rs=stmt.executeQuery(sql);
@@ -76,7 +77,7 @@ public class CompanyDaoIml implements CompanyDao {
         Connection con = connection.getConnection();
         try {
 
-            String sql = "INSERT INTO `company`(`name`, `sector`) VALUES  VALUES (?,?)";
+            String sql = "INSERT INTO company(name, sector) VALUES (?,?)";
 
             PreparedStatement ps = con.prepareStatement(sql);
 
@@ -102,7 +103,7 @@ public class CompanyDaoIml implements CompanyDao {
         CompanyBean companyBean=null;
         try {
 
-            String sql = "SELECT * FROM `company` WHERE name='"+name+"'";
+            String sql = "SELECT * FROM company WHERE name='"+name+"'";
 
            Statement stmt=con.createStatement();
            ResultSet rs=stmt.executeQuery(sql);
@@ -126,7 +127,7 @@ public class CompanyDaoIml implements CompanyDao {
         CompanyBean companyBean=null;
         try {
 
-            String sql = "SELECT * FROM `company` WHERE sector='"+sector+"'";
+            String sql = "SELECT * FROM company WHERE sector='"+sector+"'";
 
            Statement stmt=con.createStatement();
            ResultSet rs=stmt.executeQuery(sql);

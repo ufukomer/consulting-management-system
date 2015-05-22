@@ -5,18 +5,15 @@
  */
 package com.mycompany.consulting.management.system;
 
+import org.junit.Test;
 /**
  *
  * @author Ufuk
  */
-public class Test {
+public class BilsorTest {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
-        System.out.println("sess control");
+    @Test
+    public void test() {
+        
     }
-    
 }

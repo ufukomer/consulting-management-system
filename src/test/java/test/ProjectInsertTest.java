@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.consulting.management.system.database.test;
+package test;
 
 import com.mycompany.consulting.management.system.bean.ProjectBean;
 import com.mycompany.consulting.management.system.dao.imp.ProjectDaoIml;
@@ -23,7 +23,6 @@ public class ProjectInsertTest {
         
         ProjectDaoIml imp = new ProjectDaoIml();
         imp.addProject(pro);
-    }
-    
+    }    
     
 }

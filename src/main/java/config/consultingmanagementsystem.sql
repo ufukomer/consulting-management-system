@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS `company` (
 
 CREATE TABLE IF NOT EXISTS `personnel` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+`projectid` int(11),
   `name` varchar(50) NOT NULL,
   `surname` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
@@ -48,7 +49,8 @@ CREATE TABLE IF NOT EXISTS `personnel` (
   `role` int(11) NOT NULL,
   `salary` int(11) NOT NULL,
   `isWorking` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+FOREIGN KEY (projectid) REFERENCES project(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------

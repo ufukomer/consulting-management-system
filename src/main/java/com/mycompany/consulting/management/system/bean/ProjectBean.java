@@ -21,8 +21,80 @@ public class ProjectBean {
     
     private Date startedDate;
     private Date endedDate;
-
+    
+    private int projectManagerNumber;
+    private int analistNumber;
+    private int designerNumber;
+    private int developerNumber;
+    private int testerNumber;
+    
+    private boolean readyToStart;
+    
     public ProjectBean() {
+    }
+
+    public boolean isReadyToStart() {
+        return readyToStart;
+    }
+
+    public void setReadyToStart(boolean readyToStart) {
+        this.readyToStart = readyToStart;
+    }
+
+    public Date getStartedDate() {
+        return startedDate;
+    }
+
+    public void setStartedDate(Date startedDate) {
+        this.startedDate = startedDate;
+    }
+
+    public Date getEndedDate() {
+        return endedDate;
+    }
+
+    public void setEndedDate(Date endedDate) {
+        this.endedDate = endedDate;
+    }
+
+    public int getProjectManagerNumber() {
+        return projectManagerNumber;
+    }
+
+    public void setProjectManagerNumber(int projectManagerNumber) {
+        this.projectManagerNumber = projectManagerNumber;
+    }
+
+    public int getAnalistNumber() {
+        return analistNumber;
+    }
+
+    public void setAnalistNumber(int analistNumber) {
+        this.analistNumber = analistNumber;
+    }
+
+    public int getDesignerNumber() {
+        return designerNumber;
+    }
+
+    public void setDesignerNumber(int designerNumber) {
+        this.designerNumber = designerNumber;
+    }
+
+    public int getDeveloperNumber() {
+        return developerNumber;
+    }
+
+    public void setDeveloperNumber(int developerNumber) {
+        this.developerNumber = developerNumber;
+    }
+
+    public int getTesterNumber() {
+        return testerNumber;
+    }
+
+    public void setTesterNumber(int testerNumber) {
+        this.testerNumber = testerNumber;
     }
     
     public int getId() {

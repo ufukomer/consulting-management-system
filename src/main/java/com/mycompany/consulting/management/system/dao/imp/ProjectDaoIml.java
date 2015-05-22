@@ -42,12 +42,18 @@ public class ProjectDaoIml implements ProjectDao {
         logger.info("Started the adding the project to the database");
         boolean isInsert = false;
         try {
-            String insertSql = "insert into project (name , sector , min , max) values(?,?,?,?)";
+            String insertSql = "insert into project (name , sector , min , max,projectManagerNumber,"
+                    + "analistNumber,designerNumber,developerNumber,testerNumber) values(?,?,?,?,?,?,?,?,?)";
             prestmt = conn.prepareStatement(insertSql);
             prestmt.setString(1, projectbean.getName());
             prestmt.setString(2, projectbean.getSector());
             prestmt.setString(3, String.valueOf(projectbean.getMinimumPersonelNumber()));
             prestmt.setString(4, String.valueOf(projectbean.getMaximumPersonelNumber()));
+            prestmt.setString(5, String.valueOf(projectbean.getProjectManagerNumber()));
+            prestmt.setString(6, String.valueOf(projectbean.getAnalistNumber()));
+            prestmt.setString(7, String.valueOf(projectbean.getDesignerNumber()));
+            prestmt.setString(8, String.valueOf(projectbean.getDeveloperNumber()));
+            prestmt.setString(9, String.valueOf(projectbean.getTesterNumber()));
             isInsert = prestmt.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ProjectDaoIml.class.getName()).log(Level.SEVERE, null, ex);

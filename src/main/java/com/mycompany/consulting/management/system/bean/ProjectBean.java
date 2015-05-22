@@ -5,6 +5,8 @@
  */
 package com.mycompany.consulting.management.system.bean;
 
+import java.util.Date;
+
 /**
  *
  * @author Ufuk
@@ -16,6 +18,9 @@ public class ProjectBean {
     private String sector;
     private int minimumPersonelNumber;
     private int maximumPersonelNumber;
+    
+    private Date startedDate;
+    private Date endedDate;
 
     public ProjectBean() {
     }

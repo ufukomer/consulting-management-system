@@ -42,10 +42,12 @@ public class ProjectDaoIml implements ProjectDao {
         logger.info("Started the adding the project to the database");
         boolean isInsert = false;
         try {
-            String insertSql = "insert into project (name , sector) values(?,?)";
+            String insertSql = "insert into project (name , sector , min , max) values(?,?,?,?)";
             prestmt = conn.prepareStatement(insertSql);
             prestmt.setString(1, projectbean.getName());
             prestmt.setString(2, projectbean.getSector());
+            prestmt.setString(3, String.valueOf(projectbean.getMinimumPersonelNumber()));
+            prestmt.setString(4, String.valueOf(projectbean.getMaximumPersonelNumber()));
             isInsert = prestmt.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ProjectDaoIml.class.getName()).log(Level.SEVERE, null, ex);

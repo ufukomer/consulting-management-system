@@ -8,6 +8,7 @@ package com.mycompany.consulting.management.system.service;
 
 import com.mycompany.consulting.management.system.bean.ProjectBean;
 import com.mycompany.consulting.management.system.dao.imp.ProjectDaoIml;
+import java.util.List;
 
 /**
  *
@@ -31,6 +32,10 @@ public class ProjectService {
     
     public ProjectBean getProject(int id){
         return daoIml.getProjectById(id);
+    }
+    
+    public List<ProjectBean> getAllProjectList(){
+        return daoIml.getAllProject();
     }
     
     

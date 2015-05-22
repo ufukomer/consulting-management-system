@@ -128,7 +128,7 @@ public class PersonnelDaoIml implements PersonnelDao {
     }
 
     @Override
-    public PersonnelBean getPersonelByEmail(String email) {
+    public PersonnelBean getPersonnelByEmail(String email) {
         PersonnelBean personnelBean = null;
 
         try {

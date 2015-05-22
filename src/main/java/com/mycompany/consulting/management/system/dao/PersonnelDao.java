@@ -18,7 +18,7 @@ public interface PersonnelDao {
 
     PersonnelBean getPersonnelById(int id);
 
-    PersonnelBean getPersonelByEmail(String email);
+    PersonnelBean getPersonnelByEmail(String email);
 
     boolean updatePersonnelById(int id);
 

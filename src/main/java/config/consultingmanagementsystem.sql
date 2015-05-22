@@ -63,6 +63,8 @@ CREATE TABLE IF NOT EXISTS `project` (
   `sector` varchar(50) NOT NULL,
   `min` int(11),
   `max` int(11),
+  `startedDate` date not null,
+  `endedDate` date not null,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 

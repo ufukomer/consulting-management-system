@@ -23,6 +23,7 @@ public class ProjectDaoIml implements ProjectDao {
     Connection conn;
     PreparedStatement prestmt;
     ConnectionControlBean connectionControl;
+    private static final Logger logger = Logger.getLogger(ProjectDaoIml.class.getName());
 
     public ProjectDaoIml() {
         try {
@@ -34,10 +35,11 @@ public class ProjectDaoIml implements ProjectDao {
 
     @Override
     public boolean addProject(ProjectBean projectbean) {
+        logger.info("Started the adding the project to the database");
         boolean isInsert = false;
         try {
-            String insert = "insert into project (name , sector) values(?,?)";
-            prestmt = conn.prepareStatement(insert);
+            String insertSql = "insert into project (name , sector) values(?,?)";
+            prestmt = conn.prepareStatement(insertSql);
             prestmt.setString(1, projectbean.getName());
             prestmt.setString(2, projectbean.getSector());
             isInsert = prestmt.execute();
@@ -51,6 +53,8 @@ public class ProjectDaoIml implements ProjectDao {
                 if (prestmt != null) {
                     prestmt.close();
                 }
+                if(isInsert == true)
+                    logger.info("Adding the project to database:");
             } catch (SQLException ex) {
                 Logger.getLogger(ProjectDaoIml.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -61,7 +65,29 @@ public class ProjectDaoIml implements ProjectDao {
 
     @Override
     public boolean deleteProjectById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       logger.info("Started the deleting the project from the database");
+       boolean isDeleted = false;
+       
+       try {     
+            String deleteSql = "delete from project where id = ?";
+            prestmt = conn.prepareStatement(deleteSql);
+            prestmt.setInt(1, id);
+            isDeleted = prestmt.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+                try { 
+                    if(conn != null)
+                        conn.close();
+                    if(conn != null)
+                        prestmt.close();
+                    if(isDeleted == true)
+                        logger.info("Deleting the project from database");
+            } catch (SQLException ex) {
+                Logger.getLogger(ProjectDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+       return isDeleted;
     }
 
     @Override

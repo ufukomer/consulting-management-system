@@ -10,6 +10,12 @@ package com.mycompany.consulting.management.system.bean;
  * @author semih
  */
 public class CompanyBean {
+
+    public CompanyBean(int id, String name, String sector) {
+        this.id = id;
+        this.name = name;
+        this.sector = sector;
+    }
     
     private int id;
     private String name;
@@ -18,6 +24,7 @@ public class CompanyBean {
     public CompanyBean() {
     }
 
+    
     public int getId() {
         return id;
     }

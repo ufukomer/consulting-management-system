@@ -7,6 +7,7 @@
 package com.mycompany.consulting.management.system.dao;
 
 import com.mycompany.consulting.management.system.bean.CompanyBean;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public interface CompanyDao {
     
     public List<CompanyBean> getAllCompanies();
     
-    public boolean addCompany(CompanyBean bean);
+    public boolean addCompany(CompanyBean bean) throws ClassNotFoundException, SQLException;
     
     public List<CompanyBean> getCompanyByName();
     

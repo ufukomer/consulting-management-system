@@ -11,9 +11,9 @@ package com.mycompany.consulting.management.system.bean;
  */
 public class Company {
     
-    int id;
-    String name;
-    String sector;
+    private int id;
+    private String name;
+    private String sector;
 
     public Company() {
     }

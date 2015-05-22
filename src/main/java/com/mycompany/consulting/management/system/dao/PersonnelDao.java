@@ -25,4 +25,6 @@ public interface PersonnelDao {
     boolean deletePersonnelById(int id);
     
     List<PersonnelBean> getAllPersonnel();
+    
+    List<PersonnelBean> getFreePersonnelByRole(String role);
 }

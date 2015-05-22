@@ -256,4 +256,45 @@ public class PersonnelDaoIml implements PersonnelDao {
         return personnelList;
     }
 
+    @Override
+    public List<PersonnelBean> getFreePersonnelByRole(String role) {
+        
+        List<PersonnelBean> personnelList = new ArrayList<>();
+        
+        try {
+            
+            String sql = "select * from personnel where role = '" + role + "' and isWorking = false";
+            prestmt = conn.prepareStatement(sql);
+            rs = prestmt.executeQuery(sql);
+
+            while (rs.next()) {
+                personnelList.add(new PersonnelBean(rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("surname"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("role"),
+                        rs.getInt("salary"),
+                        rs.getBoolean("isWorking")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+                if (prestmt != null) {
+                    prestmt.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return personnelList;
+    }
+
 }

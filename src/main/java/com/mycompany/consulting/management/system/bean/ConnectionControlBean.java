@@ -8,8 +8,6 @@ import java.util.logging.Logger;
 
 public class ConnectionControlBean {
 
-    String a;
-
     public String myDriver = "com.mysql.jdbc.Driver";
     public final String url = "jdbc:mysql://127.0.0.1/";
     public final String db = "consultingmanagementsystem";
@@ -27,10 +25,8 @@ public class ConnectionControlBean {
             return con;
         } catch (SQLException ex) {
             LOGGER.warning("DB Connection Error! ," + ex.getMessage());
-
         }
 
         return null;
-
     }
 }

@@ -53,6 +53,7 @@ public class PersonnelCreate extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("New User");
 
         jLabel6.setText("Role:");
 

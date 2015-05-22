@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-package com.mycompany.consulting.management.system.dao;
+package com.mycompany.consulting.management.system.dao.imp;
 
 /**
  *
  * @author MelihKerman
  */
-public interface PersonnelDao {
+public class CompanyDaoIml {
     
 }

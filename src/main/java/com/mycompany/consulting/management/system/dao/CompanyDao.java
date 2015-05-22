@@ -10,6 +10,6 @@ package com.mycompany.consulting.management.system.dao;
  *
  * @author MelihKerman
  */
-public class CompanyDao {
+public interface CompanyDao {
     
 }

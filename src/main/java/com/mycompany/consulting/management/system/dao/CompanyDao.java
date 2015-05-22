@@ -16,14 +16,14 @@ import java.util.List;
  */
 public interface CompanyDao {
     
-    public CompanyBean getCompanyById(int id);
+    public CompanyBean getCompanyById(int id)throws ClassNotFoundException, SQLException;
     
-    public List<CompanyBean> getAllCompanies();
+    public List<CompanyBean> getAllCompanies()throws ClassNotFoundException, SQLException;
     
     public boolean addCompany(CompanyBean bean) throws ClassNotFoundException, SQLException;
     
-    public List<CompanyBean> getCompanyByName();
+    public CompanyBean getCompanyByName(String name)throws ClassNotFoundException, SQLException;
     
-    public List<CompanyBean> getCompanyBySector();
+    public CompanyBean getCompanyBySector(String sector)throws ClassNotFoundException, SQLException;
     
 }

@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -116,13 +117,51 @@ public class ProjectDaoIml implements ProjectDao {
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProjectDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+                try { 
+                    if(conn != null)
+                        conn.close();
+                    if(conn != null)
+                        prestmt.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ProjectDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return project;
     }
 
     @Override
     public List<ProjectBean> getAllProject() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<ProjectBean> allProject = null;
+        ProjectBean projectBean = null;
+            try {
+                logger.info("Started the getting all project ");
+                
+                String getAllProject = "Select * from project";
+                prestmt = conn.prepareStatement(getAllProject);
+                result = prestmt.executeQuery();
+                
+                allProject = new ArrayList<>();
+                while (result.next()) {
+                    projectBean = new ProjectBean();
+                    projectBean.setId(result.getInt("id"));
+                    projectBean.setName(result.getString("name"));
+                    projectBean.setSector(result.getString("sector"));
+                    allProject.add(projectBean);
+                }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+                try { 
+                    if(conn != null)
+                        conn.close();
+                    if(conn != null)
+                        prestmt.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ProjectDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return allProject;
     }
 
 }

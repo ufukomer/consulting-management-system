@@ -19,6 +19,7 @@ public interface ProjectDao {
 
     public boolean deleteProjectById(int id);
 
+    @Deprecated
     public boolean updateProjectById(int id);
 
     public ProjectBean getProjectById(int id);

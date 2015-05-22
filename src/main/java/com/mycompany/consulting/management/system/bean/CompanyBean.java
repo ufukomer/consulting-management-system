@@ -9,13 +9,13 @@ package com.mycompany.consulting.management.system.bean;
  *
  * @author semih
  */
-public class Company {
+public class CompanyBean {
     
     private int id;
     private String name;
     private String sector;
 
-    public Company() {
+    public CompanyBean() {
     }
 
     public int getId() {

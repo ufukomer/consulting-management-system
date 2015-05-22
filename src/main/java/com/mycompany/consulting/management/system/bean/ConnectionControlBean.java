@@ -1,4 +1,4 @@
-package com.permitsControl.Bean;
+package com.mycompany.consulting.management.system.bean;
 
 
 import java.sql.Connection;

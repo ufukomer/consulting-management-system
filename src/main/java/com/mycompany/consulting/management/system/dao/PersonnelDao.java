@@ -12,4 +12,6 @@ package com.mycompany.consulting.management.system.dao;
  */
 public interface PersonnelDao {
     
+
+    
 }

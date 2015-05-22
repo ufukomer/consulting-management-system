@@ -12,7 +12,7 @@ public class ConnectionControlBean {
     public final String url = "jdbc:mysql://127.0.0.1/";
     public final String db = "consultingmanagementsystem";
     public final String user = "root";//ProjectProperties.getProperty("mysql.username");
-    public final String Password = "password";// ProjectProperties.getProperty("mysql.password");
+    public final String Password = "";// ProjectProperties.getProperty("mysql.password");
     private final static Logger LOGGER = Logger.getLogger(ConnectionControlBean.class.getName());
 
     public Connection getConnection() throws ClassNotFoundException {

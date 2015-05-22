@@ -99,6 +99,7 @@ public class PersonnelBean {
         this.isWorking = isWorking;
     }
     
+    @Override
     public String toString() {
         return "\n" + "name: " + name +
                 " surname: " + surname +

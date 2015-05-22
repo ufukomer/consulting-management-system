@@ -11,6 +11,7 @@ import com.mycompany.consulting.management.system.dao.ProjectDao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -97,6 +98,11 @@ public class ProjectDaoIml implements ProjectDao {
 
     @Override
     public ProjectBean getProjectById(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<ProjectBean> getAllProject() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

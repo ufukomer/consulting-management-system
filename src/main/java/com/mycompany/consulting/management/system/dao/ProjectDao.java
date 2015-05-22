@@ -7,6 +7,7 @@
 package com.mycompany.consulting.management.system.dao;
 
 import com.mycompany.consulting.management.system.bean.ProjectBean;
+import java.util.List;
 
 /**
  *
@@ -22,6 +23,6 @@ public interface ProjectDao {
 
     public ProjectBean getProjectById(int id);
 
-
+    public List<ProjectBean> getAllProject();
     
 }

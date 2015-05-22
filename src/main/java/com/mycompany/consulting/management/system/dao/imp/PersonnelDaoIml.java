@@ -1,6 +1,5 @@
 package com.mycompany.consulting.management.system.dao.imp;
 
-import com.mycompany.consulting.management.system.bean.CompanyBean;
 import com.mycompany.consulting.management.system.bean.ConnectionControlBean;
 import com.mycompany.consulting.management.system.bean.PersonnelBean;
 import com.mycompany.consulting.management.system.dao.PersonnelDao;
@@ -24,6 +23,7 @@ import java.util.logging.Logger;
  */
 public class PersonnelDaoIml implements PersonnelDao {
 
+    private static final Logger logger = Logger.getLogger(PersonnelDaoIml.class.getName());
     private Connection conn;
     private PreparedStatement prestmt;
     private ResultSet rs;
@@ -57,7 +57,9 @@ public class PersonnelDaoIml implements PersonnelDao {
             prestmt.setBoolean(7, personnelBean.isIsWorking());
 
             isInsert = prestmt.execute();
-
+            
+            if(isInsert)
+                logger.info("Personel inserted into database");
         } catch (SQLException ex) {
             Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -191,6 +193,8 @@ public class PersonnelDaoIml implements PersonnelDao {
 
             isDeleted = prestmt.execute();
 
+            if(isDeleted)
+                logger.info("Personnel has been deleted");
         } catch (SQLException ex) {
             Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -234,6 +238,20 @@ public class PersonnelDaoIml implements PersonnelDao {
             }
         } catch (SQLException ex) {
             Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+                if (prestmt != null) {
+                    prestmt.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return personnelList;
     }

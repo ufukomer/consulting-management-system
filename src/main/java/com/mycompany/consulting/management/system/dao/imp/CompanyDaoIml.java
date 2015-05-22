@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.mycompany.consulting.management.system.dao.imp;
 
 import com.mycompany.consulting.management.system.bean.CompanyBean;
@@ -18,7 +17,7 @@ import java.util.List;
  *
  * @author MelihKerman
  */
-public class CompanyDaoIml implements CompanyDao{
+public class CompanyDaoIml implements CompanyDao {
 
     @Override
     public CompanyBean getCompanyById(int id) {
@@ -32,42 +31,28 @@ public class CompanyDaoIml implements CompanyDao{
 
     @Override
     public boolean addCompany(CompanyBean bean) throws ClassNotFoundException, SQLException {
-     
-		
-		
-		
-	
-		ConnectionControlBean connection = new ConnectionControlBean();
-		Connection con = connection.getConnection();
-		try {
 
-			String sql = "INSERT INTO `company`(`name`, `sector`) VALUES  VALUES (?,?,?)";
+        ConnectionControlBean connection = new ConnectionControlBean();
+        Connection con = connection.getConnection();
+        try {
 
-		
+            String sql = "INSERT INTO `company`(`name`, `sector`) VALUES  VALUES (?,?)";
 
-			PreparedStatement ps = con.prepareStatement(sql);
-		
-			ps.setString(1, bean.getName());
-			ps.setString(2, bean.getSector());
-			
-			
-			
-	
-			ps.executeUpdate();
-			
-			
-		} catch (Exception ex) {
-			return false;
-                        
-		}
-		finally{
-			con.close();
-			
-		}
-                return true;
-	}
+            PreparedStatement ps = con.prepareStatement(sql);
 
-    
+            ps.setString(1, bean.getName());
+            ps.setString(2, bean.getSector());
+
+            ps.executeUpdate();
+
+        } catch (Exception ex) {
+            return false;
+        } finally {
+            con.close();
+        }
+        
+        return true;
+    }
 
     @Override
     public List<CompanyBean> getCompanyByName() {
@@ -78,5 +63,5 @@ public class CompanyDaoIml implements CompanyDao{
     public List<CompanyBean> getCompanyBySector() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

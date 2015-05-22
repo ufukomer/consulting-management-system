@@ -22,12 +22,12 @@ public class ProjectService {
         daoIml = new ProjectDaoIml();
     }
     
-    public void addProject(ProjectBean bean){
-        daoIml.addProject(bean);
+    public boolean addProject(ProjectBean bean){
+        return daoIml.addProject(bean);
     }
     
-    public void deleteProject(int id){
-        daoIml.deleteProjectById(id);
+    public boolean deleteProject(int id){
+        return daoIml.deleteProjectById(id);
     }
     
     public ProjectBean getProject(int id){

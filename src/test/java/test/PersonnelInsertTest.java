@@ -30,7 +30,7 @@ public class PersonnelInsertTest {
         PersonnelDaoIml personnelDaoIml = new PersonnelDaoIml();
         //personnelDaoIml.addPersonnel(personnelBean);
         
-        PersonnelBean omer = personnelDaoIml.getPersonelByEmail("ufukomer@hotmail.com");
+        PersonnelBean omer = personnelDaoIml.getPersonnelByEmail("ufukomer@hotmail.com");
         
         System.out.println(omer.getName());
     }

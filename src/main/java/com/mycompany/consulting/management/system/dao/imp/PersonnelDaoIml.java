@@ -306,7 +306,7 @@ public class PersonnelDaoIml implements PersonnelDao {
 
         try {
 
-            String sql = "UPDATE PERSONNEL SET(isWorking=?) WHERE email='" + username + "'";
+            String sql = "UPDATE PERSONNEL SET isWorking=? WHERE email='" + username + "'";
             prestmt = conn.prepareStatement(sql);
             prestmt.setBoolean(1, isWorking);
             prestmt.executeUpdate();
@@ -329,7 +329,7 @@ public class PersonnelDaoIml implements PersonnelDao {
     @Override
     public boolean setPersonnelProjectId(int projectId, String email) {
         try {
-            String sql = "UPDATE PERSONNEL SET(projectid=?) WHERE email='" + email + "'";
+            String sql = "UPDATE PERSONNEL SET projectid=? WHERE email='" + email + "'";
             prestmt = conn.prepareStatement(sql);
             prestmt.setInt(1, projectId);
             prestmt.executeUpdate();

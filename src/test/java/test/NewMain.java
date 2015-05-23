@@ -21,18 +21,23 @@ public class NewMain {
     public static void main(String[] args) {
         
         PersonnelBean personnelBean = new PersonnelBean();
-        personnelBean.setName("melih");
+        personnelBean.setName("omeere");
         personnelBean.setSurname("Efendi");
-        personnelBean.setEmail("Omer@hot");
-        personnelBean.setIsWorking(true);
+        personnelBean.setEmail("om@hot");
+        personnelBean.setIsWorking(false);
         personnelBean.setSalary(10000);
         personnelBean.setRole("tasimaci");
-        personnelBean.setPassword("24234234");
+        personnelBean.setPassword("122222");
         PersonnelDaoIml personnelDaoIml = new PersonnelDaoIml();
         //personnelDaoIml.addPersonnel(personnelBean);
+        personnelDaoIml.setPersonnelProjectId(123, "om@hot");
         
-        List<PersonnelBean> list = personnelDaoIml.getFreePersonnelByRole("tasimaci");
-        System.out.println(list);
+        //personnelDaoIml.updateWorkingStatus("aliiiiiiii@hot", true);
+        
+        
+        /*List<PersonnelBean> list = personnelDaoIml.getFreePersonnelByRole("tasimaci");
+        System.out.println(list);*/
+
     }
     
 }

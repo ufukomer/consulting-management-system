@@ -46,11 +46,10 @@ CREATE TABLE IF NOT EXISTS `personnel` (
   `surname` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
-  `role` int(11) NOT NULL,
+  `role` varchar(80) NOT NULL,
   `salary` int(11) NOT NULL,
   `isWorking` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`),
-FOREIGN KEY (projectid) REFERENCES project(id)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------

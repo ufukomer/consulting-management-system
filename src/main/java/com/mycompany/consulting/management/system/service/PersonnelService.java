@@ -41,4 +41,8 @@ public class PersonnelService {
     public List<PersonnelBean> getAllPersonnel() {
         return daoIml.getAllPersonnel();
     }
+    
+    public List<PersonnelBean> getFreePersonnelByRole(String role){
+        return daoIml.getFreePersonnelByRole(role);
+    }
 }

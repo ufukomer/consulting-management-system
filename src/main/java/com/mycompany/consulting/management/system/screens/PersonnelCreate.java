@@ -69,7 +69,12 @@ public class PersonnelCreate extends javax.swing.JFrame {
 
         jLabel5.setText("Repeat Password:");
 
-        rolefield.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        rolefield.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Project Manager", "Analyst", "Designer", "Developer", "Tester" }));
+        rolefield.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rolefieldActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("NEW USER");
 
@@ -228,6 +233,10 @@ public class PersonnelCreate extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Wrong input!");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void rolefieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rolefieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rolefieldActionPerformed
 
     /**
      * @param args the command line arguments

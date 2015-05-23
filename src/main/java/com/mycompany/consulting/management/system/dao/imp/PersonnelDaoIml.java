@@ -297,4 +297,35 @@ public class PersonnelDaoIml implements PersonnelDao {
         return personnelList;
     }
 
+    @Override
+    public boolean updateWorkingStatus(String username,boolean isWorking) {
+        
+        
+          List<PersonnelBean> personnelList = new ArrayList<>();
+
+        try {
+
+            String sql = "UPDATE FROM PERSONNEL SET(isWorking=?) WHERE email='"+username+"'";
+            prestmt = conn.prepareStatement(sql);
+            prestmt.setBoolean(1, isWorking);
+            prestmt.executeUpdate();
+
+           
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } finally {
+           
+                
+              try {
+                  conn.close();
+              } catch (SQLException ex) {
+                  Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+              }
+                }
+          
+        return true;
+    }
+
 }

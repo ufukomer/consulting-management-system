@@ -27,4 +27,6 @@ public interface PersonnelDao {
     List<PersonnelBean> getAllPersonnel();
     
     List<PersonnelBean> getFreePersonnelByRole(String role);
+    
+    boolean updateWorkingStatus(String username,boolean isWorking);
 }

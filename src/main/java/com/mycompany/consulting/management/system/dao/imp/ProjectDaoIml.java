@@ -172,4 +172,14 @@ public class ProjectDaoIml implements ProjectDao {
         return allProject;
     }
 
+    @Override
+    public boolean projectManagerOperation(ProjectBean projectBean) {
+        
+        
+        
+        
+        
+        return false;
+    }
+
 }

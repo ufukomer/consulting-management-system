@@ -26,4 +26,6 @@ public interface ProjectDao {
 
     public List<ProjectBean> getAllProject();
     
+    public boolean projectManagerOperation(ProjectBean projectBean);
+    
 }

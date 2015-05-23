@@ -57,9 +57,10 @@ public class PersonnelDaoIml implements PersonnelDao {
             prestmt.setBoolean(7, personnelBean.isIsWorking());
 
             isInsert = prestmt.execute();
-            
-            if(isInsert)
+
+            if (isInsert) {
                 logger.info("Personel inserted into database");
+            }
         } catch (SQLException ex) {
             Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -193,8 +194,9 @@ public class PersonnelDaoIml implements PersonnelDao {
 
             isDeleted = prestmt.execute();
 
-            if(isDeleted)
+            if (isDeleted) {
                 logger.info("Personnel has been deleted");
+            }
         } catch (SQLException ex) {
             Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -258,11 +260,11 @@ public class PersonnelDaoIml implements PersonnelDao {
 
     @Override
     public List<PersonnelBean> getFreePersonnelByRole(String role) {
-        
+
         List<PersonnelBean> personnelList = new ArrayList<>();
-        
+
         try {
-            
+
             String sql = "select * from personnel where role = '" + role + "' and isWorking = false";
             prestmt = conn.prepareStatement(sql);
             rs = prestmt.executeQuery(sql);
@@ -298,33 +300,43 @@ public class PersonnelDaoIml implements PersonnelDao {
     }
 
     @Override
-    public boolean updateWorkingStatus(String username,boolean isWorking) {
-        
-        
-          List<PersonnelBean> personnelList = new ArrayList<>();
+    public boolean updateWorkingStatus(String username, boolean isWorking) {
+
+        List<PersonnelBean> personnelList = new ArrayList<>();
 
         try {
 
-            String sql = "UPDATE FROM PERSONNEL SET(isWorking=?) WHERE email='"+username+"'";
+            String sql = "UPDATE PERSONNEL SET(isWorking=?) WHERE email='" + username + "'";
             prestmt = conn.prepareStatement(sql);
             prestmt.setBoolean(1, isWorking);
             prestmt.executeUpdate();
 
-           
-            
         } catch (SQLException ex) {
             Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         } finally {
-           
-                
-              try {
-                  conn.close();
-              } catch (SQLException ex) {
-                  Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
-              }
-                }
-          
+
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean setPersonnelProjectId(int projectId, String email) {
+        try {
+            String sql = "UPDATE PERSONNEL SET(projectid=?) WHERE email='" + email + "'";
+            prestmt = conn.prepareStatement(sql);
+            prestmt.setInt(1, projectId);
+            prestmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
         return true;
     }
 

@@ -6,28 +6,17 @@
 
 package com.mycompany.consulting.management.system.screens;
 
-import com.mycompany.consulting.management.system.bean.ProjectBean;
-import com.mycompany.consulting.management.system.service.ProjectService;
-import java.util.List;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author MelihKerman
  */
 public class MainFrame extends javax.swing.JFrame {
 
-    DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"id","Project Name" , "Sector" , "Min Per.", "Max Par.", 
-    "Project Manager Number" , "Analist Number" , "Designer Number" , "Developer Number" , "Tester Number","Started Date","Ready To Start"},0);
-    
-    ProjectService projectService = new ProjectService();
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
-        projectService.addAllProjectToTable(table, tableModel);
     }
 
     /**
@@ -39,64 +28,22 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        createNewProject = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        createNewProject.setText("Create New Project");
-        createNewProject.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createNewProjectActionPerformed(evt);
-            }
-        });
-
-        table.setModel(tableModel);
-        jScrollPane2.setViewportView(table);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1246, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(createNewProject)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(createNewProject, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGap(0, 300, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void createNewProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createNewProjectActionPerformed
-        // TODO add your handling code here:
-        ProjectCreate create = new ProjectCreate();
-        create.setVisible(true);
-        updateTheTable();
-    }//GEN-LAST:event_createNewProjectActionPerformed
-
-    public void updateTheTable(){
-        deleteAllElementFromTable();
-        projectService.addAllProjectToTable(table, tableModel);
-    }
-    
-    public void deleteAllElementFromTable(){
-        for(int i = 0; i < tableModel.getRowCount();i++)
-            tableModel.removeRow(i);
-    }
     /**
      * @param args the command line arguments
      */
@@ -133,8 +80,5 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton createNewProject;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

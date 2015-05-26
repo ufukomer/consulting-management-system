@@ -240,7 +240,7 @@ public class ProjectDaoIml implements ProjectDao {
                 conn = new ConnectionControlBean().getConnection();
                 logger.info("Started the getting all project ");
                 
-                String getAllProject = "Select * from project where readyToStart = true";
+                String getAllProject = "Select * from project where readyToStart = false";
                 prestmt = conn.prepareStatement(getAllProject);
                 result = prestmt.executeQuery();
                 

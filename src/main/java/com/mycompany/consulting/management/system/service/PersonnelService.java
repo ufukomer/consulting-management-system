@@ -46,6 +46,7 @@ public class PersonnelService {
         return daoIml.getFreePersonnelByRole(role);
     }
     
+<<<<<<< HEAD
     public boolean updateWorkingStatus(String username,boolean isWorking){
         return daoIml.updateWorkingStatus(username,isWorking);
     }
@@ -53,6 +54,8 @@ public class PersonnelService {
     public boolean setPersonnelProjectId(int projectId, String email) {
         return daoIml.setPersonnelProjectId(projectId, email);
     }
+=======
+>>>>>>> dfcedf3c64c0d09ec095cb791916b85338df5aea
     public boolean getPersonnelWorkingState(String email) {
         return daoIml.getPersonnelWorkingStateByEmail(email);
     }

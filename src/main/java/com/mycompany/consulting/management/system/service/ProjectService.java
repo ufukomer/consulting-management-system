@@ -77,4 +77,8 @@ public class ProjectService {
     public boolean updateProjectStatus(int projectId, boolean updateStatus) {
         return daoIml.updateProjectStatus(projectId, updateStatus);
     }
+    
+    public boolean projectRoleOperation(int projectId) {
+        return daoIml.projectRoleOperation(projectId);
+    }
 }

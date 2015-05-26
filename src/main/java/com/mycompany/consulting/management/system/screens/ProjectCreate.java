@@ -21,7 +21,7 @@ public class ProjectCreate extends javax.swing.JFrame {
      * Creates new form ProjectCreate
      */
     public ProjectCreate() {
-        initComponents();
+        initComponents();     
         dao = new ProjectDaoIml();
     }
 

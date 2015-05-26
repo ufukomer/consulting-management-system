@@ -30,11 +30,12 @@ public class NewMain {
         personnelBean.setPassword("122222");
         PersonnelDaoIml personnelDaoIml = new PersonnelDaoIml();
         //personnelDaoIml.addPersonnel(personnelBean);
-        personnelDaoIml.setPersonnelProjectId(123, "om@hot");
+        //personnelDaoIml.setPersonnelProjectId(123, "om@hot");
         
         //personnelDaoIml.updateWorkingStatus("aliiiiiiii@hot", true);
         
-        
+        boolean isWorking = personnelDaoIml.getPersonnelWorkingStateByEmail("ufukomer@hotmail.com");
+        System.out.println(isWorking);
         /*List<PersonnelBean> list = personnelDaoIml.getFreePersonnelByRole("tasimaci");
         System.out.println(list);*/
 

@@ -53,5 +53,8 @@ public class PersonnelService {
     public boolean setPersonnelProjectId(int projectId, String email) {
         return daoIml.setPersonnelProjectId(projectId, email);
     }
+    public boolean getPersonnelWorkingState(String email) {
+        return daoIml.getPersonnelWorkingStateByEmail(email);
+    }
 }
 

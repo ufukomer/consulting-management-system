@@ -340,4 +340,43 @@ public class PersonnelDaoIml implements PersonnelDao {
         return true;
     }
 
+    @Override
+    public boolean getPersonnelWorkingStateByEmail(String email) {
+        
+        boolean isWorking = true;
+
+        try {
+
+            String sql = "select isWorking from personnel where email = ?";
+
+            prestmt = conn.prepareStatement(sql);
+
+            prestmt.setString(1, email);
+
+            rs = prestmt.executeQuery();
+
+            while (rs.next()) {
+                isWorking = rs.getBoolean("isWorking");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+                if (prestmt != null) {
+                    prestmt.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return isWorking;
+    }
+
 }

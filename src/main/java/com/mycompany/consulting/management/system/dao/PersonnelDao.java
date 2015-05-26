@@ -31,4 +31,6 @@ public interface PersonnelDao {
     boolean updateWorkingStatus(String username,boolean isWorking);
     
     boolean setPersonnelProjectId(int projectId, String email);
+    
+    boolean getPersonnelWorkingStateByEmail(String email);
 }

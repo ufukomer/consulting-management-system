@@ -3,8 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.mycompany.consulting.management.system.screens;
+
+import com.mycompany.consulting.management.system.bean.PersonnelBean;
+import com.mycompany.consulting.management.system.service.PersonnelService;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -12,13 +19,38 @@ package com.mycompany.consulting.management.system.screens;
  */
 public class SetPersonneltoProject extends javax.swing.JFrame {
 
+    private DefaultListModel<String> personnelListModel;
+
     /**
      * Creates new form SetPersonneltoProject
      */
     public SetPersonneltoProject() {
         initComponents();
+        initModels();
     }
 
+    /**
+     * Initialize the models
+     */
+    private void initModels() {
+        personnelListModel = new DefaultListModel<>();
+        setList();
+    }
+
+    /**
+     * Sets personnelList with free personnel according to selected role in jcomboBox
+     */
+    private void setList() {
+        PersonnelService personnelService = new PersonnelService();
+        List<PersonnelBean> listData = personnelService.getFreePersonnelByRole(String.valueOf(jComboBox1.getSelectedItem()));
+        Object[] mailList = new Object[listData.size()];
+        
+        for (int i = 0; i < listData.size(); i++) {
+            mailList[i] = listData.get(i).getEmail();
+        }
+        
+        jList_Personnel.setListData(mailList);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,51 +59,119 @@ public class SetPersonneltoProject extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
+        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("consultingmanagementsystem?zeroDateTimeBehavior=convertToNullPU").createEntityManager();
+        personnelQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT p FROM Personnel p");
+        personnelList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : personnelQuery.getResultList();
+        personnelQuery1 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT p FROM Personnel p");
+        personnelList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : personnelQuery1.getResultList();
+        personnelQuery2 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT p FROM Personnel p");
+        personnelList2 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : personnelQuery2.getResultList();
+        projectQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT p FROM Project p");
+        projectList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : projectQuery.getResultList();
+        companyQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Company c");
+        companyList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : companyQuery.getResultList();
+        companyQuery1 = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT c FROM Company c");
+        companyList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : companyQuery1.getResultList();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jList4 = new javax.swing.JList();
+        jTable_Project = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList_Personnel = new javax.swing.JList();
+        jComboBox1 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jList3.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane3.setViewportView(jList3);
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, projectList, jTable_Project);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
+        columnBinding.setColumnName("Name");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${sector}"));
+        columnBinding.setColumnName("Sector");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${projectManagerNumber}"));
+        columnBinding.setColumnName("Project Manager");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${analistNumber}"));
+        columnBinding.setColumnName("Analist");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${designerNumber}"));
+        columnBinding.setColumnName("Designer");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${developerNumber}"));
+        columnBinding.setColumnName("Developer");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${testerNumber}"));
+        columnBinding.setColumnName("Tester");
+        columnBinding.setColumnClass(Integer.class);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+        jScrollPane3.setViewportView(jTable_Project);
 
-        jList4.setModel(new javax.swing.AbstractListModel() {
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jList_Personnel.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane4.setViewportView(jList4);
+        jScrollPane1.setViewportView(jList_Personnel);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Analist", "Project Manager", "Tester" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(159, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane3))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(180, Short.MAX_VALUE))
         );
+
+        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String email = String.valueOf(jList_Personnel.getSelectedValue());
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        setList();
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -109,9 +209,26 @@ public class SetPersonneltoProject extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList jList3;
-    private javax.swing.JList jList4;
+    private java.util.List<com.mycompany.consulting.management.system.screens.Company> companyList;
+    private java.util.List<com.mycompany.consulting.management.system.screens.Company> companyList1;
+    private javax.persistence.Query companyQuery;
+    private javax.persistence.Query companyQuery1;
+    private javax.persistence.EntityManager entityManager;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JList jList_Personnel;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable jTable_Project;
+    private java.util.List<com.mycompany.consulting.management.system.screens.Personnel> personnelList;
+    private java.util.List<com.mycompany.consulting.management.system.screens.Personnel> personnelList1;
+    private java.util.List<com.mycompany.consulting.management.system.screens.Personnel> personnelList2;
+    private javax.persistence.Query personnelQuery;
+    private javax.persistence.Query personnelQuery1;
+    private javax.persistence.Query personnelQuery2;
+    private java.util.List<com.mycompany.consulting.management.system.screens.Project> projectList;
+    private javax.persistence.Query projectQuery;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
+
 }

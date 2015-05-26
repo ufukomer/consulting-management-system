@@ -45,4 +45,8 @@ public class PersonnelService {
     public List<PersonnelBean> getFreePersonnelByRole(String role){
         return daoIml.getFreePersonnelByRole(role);
     }
+    
+    public boolean getPersonnelWorkingState(String email) {
+        return daoIml.getPersonnelWorkingStateByEmail(email);
+    }
 }

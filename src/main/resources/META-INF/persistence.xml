@@ -4,11 +4,6 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>com.mycompany.consulting.management.system.screens.Personnel</class>
     <class>com.mycompany.consulting.management.system.screens.Project</class>
-    <class>com.mycompany.consulting.management.system.screens.Company</class>
-<<<<<<< HEAD
-    <class>com.mycompany.consulting.management.system.screens.Project_1</class>
-=======
->>>>>>> dfcedf3c64c0d09ec095cb791916b85338df5aea
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/consultingmanagementsystem?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

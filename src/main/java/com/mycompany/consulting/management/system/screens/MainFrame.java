@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class MainFrame extends javax.swing.JFrame {
     DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"id","Project Name" , "Sector" , "Min Per.", "Max Par.", 
-    "Project Manager Number" , "Analist Number" , "Designer Number" , "Developer Number" , "Tester Number","Started Date","Ready To Start"},0);
+    "Project Manager Number" , "Analist Number" , "Designer Number" , "Developer Number" , "Tester Number","Started Date"},0);
     /**
      * Creates new form MainFrame
      */
@@ -59,9 +59,8 @@ public class MainFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(336, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1091, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -8,6 +8,7 @@ package com.mycompany.consulting.management.system.dao.imp;
 import com.mycompany.consulting.management.system.bean.ConnectionControlBean;
 import com.mycompany.consulting.management.system.bean.ProjectBean;
 import com.mycompany.consulting.management.system.dao.ProjectDao;
+import com.mycompany.consulting.management.system.service.PersonnelService;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,7 +49,7 @@ public class ProjectDaoIml implements ProjectDao {
             prestmt.setString(3, String.valueOf(projectbean.getMinimumPersonelNumber()));
             prestmt.setString(4, String.valueOf(projectbean.getMaximumPersonelNumber()));
             prestmt.setString(5, String.valueOf(projectbean.getProjectManagerNumber()));
-            prestmt.setString(6, String.valueOf(projectbean.getAnalistNumber()));
+            prestmt.setString(6, String.valueOf(projectbean.getAnalystNumber()));
             prestmt.setString(7, String.valueOf(projectbean.getDesignerNumber()));
             prestmt.setString(8, String.valueOf(projectbean.getDeveloperNumber()));
             prestmt.setString(9, String.valueOf(projectbean.getTesterNumber()));
@@ -161,7 +162,7 @@ public class ProjectDaoIml implements ProjectDao {
                     projectBean.setMinimumPersonelNumber(result.getInt("min"));
                     projectBean.setMaximumPersonelNumber(result.getInt("max"));
                     projectBean.setProjectManagerNumber(result.getInt("projectManagerNumber"));
-                    projectBean.setAnalistNumber(result.getInt("analistNumber"));
+                    projectBean.setAnalystNumber(result.getInt("analistNumber"));
                     projectBean.setDesignerNumber(result.getInt("designerNumber"));
                     projectBean.setDeveloperNumber(result.getInt("developerNumber"));
                     projectBean.setTesterNumber(result.getInt("testerNumber"));
@@ -207,7 +208,7 @@ public class ProjectDaoIml implements ProjectDao {
                     projectBean.setMinimumPersonelNumber(result.getInt("min"));
                     projectBean.setMaximumPersonelNumber(result.getInt("max"));
                     projectBean.setProjectManagerNumber(result.getInt("projectManagerNumber"));
-                    projectBean.setAnalistNumber(result.getInt("analistNumber"));
+                    projectBean.setAnalystNumber(result.getInt("analistNumber"));
                     projectBean.setDesignerNumber(result.getInt("designerNumber"));
                     projectBean.setDeveloperNumber(result.getInt("developerNumber"));
                     projectBean.setTesterNumber(result.getInt("testerNumber"));
@@ -253,7 +254,7 @@ public class ProjectDaoIml implements ProjectDao {
                     projectBean.setMinimumPersonelNumber(result.getInt("min"));
                     projectBean.setMaximumPersonelNumber(result.getInt("max"));
                     projectBean.setProjectManagerNumber(result.getInt("projectManagerNumber"));
-                    projectBean.setAnalistNumber(result.getInt("analistNumber"));
+                    projectBean.setAnalystNumber(result.getInt("analistNumber"));
                     projectBean.setDesignerNumber(result.getInt("designerNumber"));
                     projectBean.setDeveloperNumber(result.getInt("developerNumber"));
                     projectBean.setTesterNumber(result.getInt("testerNumber"));
@@ -277,57 +278,63 @@ public class ProjectDaoIml implements ProjectDao {
         }
         return allProject;
     }
-    /*public boolean updateRequirementsByRole(String role, String email) {
+    
+    @Override
+    public boolean projectRoleOperation(int projectId) {
         
-        String roleString = String.valueOf(role) + "number";
-        
-        String sql = "UPDATE project SET " + roleString + " =? WHERE email='" + email + "'";
+        PersonnelService personnelService = new PersonnelService();
         
         try {
             
+        
+        int analystCount = personnelService.getFreePersonnelByRole("Analyst").size();
+        int projectManagerCount = personnelService.getFreePersonnelByRole("Project Manager").size();;
+        int designerCount = personnelService.getFreePersonnelByRole("Designer").size();;
+        int developerCount = personnelService.getFreePersonnelByRole("Developer").size();;
+        int testerCount = personnelService.getFreePersonnelByRole("Tester").size();;
+        
+        ProjectBean projectBean = getProjectById(projectId);
+        if(projectBean.getAnalystNumber()<= analystCount
+                && projectBean.getDesignerNumber() <= designerCount
+                && projectBean.getDeveloperNumber() <= developerCount
+                && projectBean.getProjectManagerNumber() <= projectManagerCount
+                && projectBean.getTesterNumber() <= testerCount) {
+            
+            personnelService.setPersonnelProjectOperation(projectId, "Analyst", analystCount);
+            personnelService.setPersonnelProjectOperation(projectId, "Project Manager", projectManagerCount);
+            personnelService.setPersonnelProjectOperation(projectId, "Designer", designerCount);
+            personnelService.setPersonnelProjectOperation(projectId, "Developer", developerCount);
+            personnelService.setPersonnelProjectOperation(projectId, "Tester", testerCount);
+            logger.info("ProjectRoleOperation completed with Project Id: " + projectId);
+        }
+                
+        } catch(Exception ex) {
+            logger.warning("ProjectRoleOperation error with Project Id: " + projectId + " Message:"+ ex.getMessage());
+        }
+        return true;
+    }
+
+    @Override
+    public boolean updateProjectStatus(int projectId, boolean updateStatus) {
+        try {
+
+            String sql = "UPDATE project SET readyToStart=? WHERE id='" + projectId + "'";
             prestmt = conn.prepareStatement(sql);
-            prestmt.setInt(1, roleString);
+            prestmt.setBoolean(1, updateStatus);
             prestmt.executeUpdate();
 
         } catch (SQLException ex) {
-            Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProjectDaoIml.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         } finally {
 
             try {
                 conn.close();
             } catch (SQLException ex) {
-                Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ProjectDaoIml.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
         return true;
-    }*/
-
-    /*public boolean updateRequirementsByRole(String role, String email) {
-        
-        String roleString = String.valueOf(role) + "number";
-        
-        String sql = "UPDATE project SET " + roleString + " =? WHERE email='" + email + "'";
-        
-        try {
-            
-            prestmt = conn.prepareStatement(sql);
-            prestmt.setInt(1, roleString);
-            prestmt.executeUpdate();
-
-        } catch (SQLException ex) {
-            Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        } finally {
-
-            try {
-                conn.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        return true;
-    }*/
+    }
 }

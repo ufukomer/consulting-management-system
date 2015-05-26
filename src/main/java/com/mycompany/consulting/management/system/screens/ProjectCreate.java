@@ -176,7 +176,7 @@ public class ProjectCreate extends javax.swing.JFrame {
         bean.setMaximumPersonelNumber(Integer.valueOf(max.getText()));
         //all spinner
         bean.setProjectManagerNumber((int) projectManagerSpinner.getValue());
-        bean.setAnalistNumber((int) analistSpinner.getValue());
+        bean.setAnalystNumber((int) analistSpinner.getValue());
         bean.setDesignerNumber((int) designerSpinner.getValue());
         bean.setTesterNumber((int) testerSpinner.getValue());
         bean.setDeveloperNumber((int) developerSpinner.getValue());

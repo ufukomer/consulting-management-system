@@ -23,7 +23,7 @@ public class ProjectBean {
     private Date endedDate;
     
     private int projectManagerNumber;
-    private int analistNumber;
+    private int analystNumber;
     private int designerNumber;
     private int developerNumber;
     private int testerNumber;
@@ -65,12 +65,12 @@ public class ProjectBean {
         this.projectManagerNumber = projectManagerNumber;
     }
 
-    public int getAnalistNumber() {
-        return analistNumber;
+    public int getAnalystNumber() {
+        return analystNumber;
     }
 
-    public void setAnalistNumber(int analistNumber) {
-        this.analistNumber = analistNumber;
+    public void setAnalystNumber(int analystNumber) {
+        this.analystNumber = analystNumber;
     }
 
     public int getDesignerNumber() {

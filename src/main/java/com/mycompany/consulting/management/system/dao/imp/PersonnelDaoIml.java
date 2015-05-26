@@ -29,18 +29,18 @@ public class PersonnelDaoIml implements PersonnelDao {
     private ResultSet rs;
 
     public PersonnelDaoIml() {
+       
+    }
+
+    @Override
+    public boolean addPersonnel(PersonnelBean personnelBean) {
+        
+        boolean isInsert = false;
         try {
             conn = new ConnectionControlBean().getConnection();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    @Override
-    public boolean addPersonnel(PersonnelBean personnelBean) {
-
-        boolean isInsert = false;
-
         try {
 
             String sql = "insert into personnel (name , surname, email, "
@@ -83,7 +83,11 @@ public class PersonnelDaoIml implements PersonnelDao {
     public PersonnelBean getPersonnelById(int id) {
 
         PersonnelBean personnelBean = null;
-
+        try {
+            conn = new ConnectionControlBean().getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
 
             String sql = "select * from personnel where id = ?";
@@ -131,7 +135,11 @@ public class PersonnelDaoIml implements PersonnelDao {
     @Override
     public PersonnelBean getPersonnelByEmail(String email) {
         PersonnelBean personnelBean = null;
-
+        try {
+            conn = new ConnectionControlBean().getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
 
             String sql = "select * from personnel where email = ?";
@@ -185,6 +193,11 @@ public class PersonnelDaoIml implements PersonnelDao {
     public boolean deletePersonnelById(int id) {
         boolean isDeleted = false;
         try {
+            conn = new ConnectionControlBean().getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
 
             String sql = "delete from personnel where id = ?";
 
@@ -221,7 +234,11 @@ public class PersonnelDaoIml implements PersonnelDao {
     public List<PersonnelBean> getAllPersonnel() {
 
         List<PersonnelBean> personnelList = new ArrayList<>();
-
+        try {
+            conn = new ConnectionControlBean().getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
 
             String sql = "select * from personnel where 1";
@@ -262,7 +279,11 @@ public class PersonnelDaoIml implements PersonnelDao {
     public List<PersonnelBean> getFreePersonnelByRole(String role) {
 
         List<PersonnelBean> personnelList = new ArrayList<>();
-
+        try {
+            conn = new ConnectionControlBean().getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
 
             String sql = "select * from personnel where role = '" + role + "' and isWorking = false";
@@ -303,7 +324,11 @@ public class PersonnelDaoIml implements PersonnelDao {
     public boolean updateWorkingStatus(String username, boolean isWorking) {
 
         List<PersonnelBean> personnelList = new ArrayList<>();
-
+        try {
+            conn = new ConnectionControlBean().getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
 
             String sql = "UPDATE PERSONNEL SET isWorking=? WHERE email='" + username + "'";
@@ -329,6 +354,11 @@ public class PersonnelDaoIml implements PersonnelDao {
     @Override
     public boolean setPersonnelProjectId(int projectId, String email) {
         try {
+            conn = new ConnectionControlBean().getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
             String sql = "UPDATE PERSONNEL SET projectid=? WHERE email='" + email + "'";
             prestmt = conn.prepareStatement(sql);
             prestmt.setInt(1, projectId);
@@ -344,7 +374,11 @@ public class PersonnelDaoIml implements PersonnelDao {
     public boolean getPersonnelWorkingStateByEmail(String email) {
 
         boolean isWorking = true;
-
+        try {
+            conn = new ConnectionControlBean().getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
 
             String sql = "select isWorking from personnel where email = ?";
@@ -385,7 +419,7 @@ public class PersonnelDaoIml implements PersonnelDao {
 
     @Override
     public boolean setPersonnelProjectOperation(int projectId, String role, int requestCount) {
-
+        
         try {
             List<PersonnelBean> personnelList = getFreePersonnelByRole(role);
             for (int i = 0; i < requestCount; i++) {

@@ -7,6 +7,7 @@ package test;
 
 import com.mycompany.consulting.management.system.bean.PersonnelBean;
 import com.mycompany.consulting.management.system.dao.imp.PersonnelDaoIml;
+import com.mycompany.consulting.management.system.service.ProjectService;
 import java.util.List;
 
 /**
@@ -19,26 +20,8 @@ public class NewMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-        PersonnelBean personnelBean = new PersonnelBean();
-        personnelBean.setName("omeere");
-        personnelBean.setSurname("Efendi");
-        personnelBean.setEmail("om@hot");
-        personnelBean.setIsWorking(false);
-        personnelBean.setSalary(10000);
-        personnelBean.setRole("Project Manager");
-        personnelBean.setPassword("122222");
-        PersonnelDaoIml personnelDaoIml = new PersonnelDaoIml();
-        //personnelDaoIml.addPersonnel(personnelBean);
-        //personnelDaoIml.setPersonnelProjectId(123, "om@hot");
-        
-        //personnelDaoIml.updateWorkingStatus("aliiiiiiii@hot", true);
-        
-        boolean isWorking = personnelDaoIml.getPersonnelWorkingStateByEmail("ufukomer@hotmail.com");
-        System.out.println(isWorking);
-        /*List<PersonnelBean> list = personnelDaoIml.getFreePersonnelByRole("tasimaci");
-        System.out.println(list);*/
-
+       ProjectService projectService=new ProjectService();
+       projectService.projectRoleOperation(3);
     }
     
 }

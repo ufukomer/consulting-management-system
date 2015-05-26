@@ -69,7 +69,8 @@ public class ProjectService {
                 ,projectBean.isReadyToStart()});
         }
     }
-  
     
-    
+    public List<ProjectBean> getAllPassiveProject() {
+        return daoIml.getAllPassiveProject();
+    }
 }

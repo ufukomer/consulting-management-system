@@ -342,7 +342,7 @@ public class PersonnelDaoIml implements PersonnelDao {
 
     @Override
     public boolean getPersonnelWorkingStateByEmail(String email) {
-        
+
         boolean isWorking = true;
 
         try {
@@ -383,4 +383,21 @@ public class PersonnelDaoIml implements PersonnelDao {
    
     
 
+    @Override
+    public boolean setPersonnelProjectOperation(int projectId, String role, int requestCount) {
+
+        try {
+            List<PersonnelBean> personnelList = getFreePersonnelByRole(role);
+            for (int i = 0; i < requestCount; i++) {
+                String email = personnelList.get(i).getEmail();
+                setPersonnelProjectId(projectId, email);
+                updateWorkingStatus(email, true);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+
+        return true;
+    }
 }

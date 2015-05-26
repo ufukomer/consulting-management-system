@@ -33,4 +33,7 @@ public interface PersonnelDao {
     boolean setPersonnelProjectId(int projectId, String email);
     
     boolean getPersonnelWorkingStateByEmail(String email);
+    
+    boolean setPersonnelProjectOperation(int projectId, String role, int requestCount);
+    
 }

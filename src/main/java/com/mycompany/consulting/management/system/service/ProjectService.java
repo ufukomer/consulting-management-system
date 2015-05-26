@@ -51,7 +51,7 @@ public class ProjectService {
             table.setModel(tableModel);
             for(ProjectBean projectBean : projectList)
                 tableModel.addRow(new Object[]{projectBean.getId(),projectBean.getName(),projectBean.getSector(),projectBean.getMinimumPersonelNumber()
-                ,projectBean.getMaximumPersonelNumber(),projectBean.getProjectManagerNumber(),projectBean.getAnalistNumber()
+                ,projectBean.getMaximumPersonelNumber(),projectBean.getProjectManagerNumber(),projectBean.getAnalystNumber()
                 ,projectBean.getDesignerNumber(),projectBean.getDeveloperNumber(), projectBean.getTesterNumber(),projectBean.getStartedDate()
                 ,projectBean.isReadyToStart()});
         }
@@ -64,7 +64,7 @@ public class ProjectService {
             table.setModel(tableModel);
             for(ProjectBean projectBean : projectList)
                 tableModel.addRow(new Object[]{projectBean.getId(),projectBean.getName(),projectBean.getSector(),projectBean.getMinimumPersonelNumber()
-                ,projectBean.getMaximumPersonelNumber(),projectBean.getProjectManagerNumber(),projectBean.getAnalistNumber()
+                ,projectBean.getMaximumPersonelNumber(),projectBean.getProjectManagerNumber(),projectBean.getAnalystNumber()
                 ,projectBean.getDesignerNumber(),projectBean.getDeveloperNumber(), projectBean.getTesterNumber(),projectBean.getStartedDate()
                 ,projectBean.isReadyToStart()});
         }
@@ -72,5 +72,13 @@ public class ProjectService {
     
     public List<ProjectBean> getAllPassiveProject() {
         return daoIml.getAllPassiveProject();
+    }
+    
+    public boolean updateProjectStatus(int projectId, boolean updateStatus) {
+        return daoIml.updateProjectStatus(projectId, updateStatus);
+    }
+    
+    public boolean projectRoleOperation(int projectId) {
+        return daoIml.projectRoleOperation(projectId);
     }
 }

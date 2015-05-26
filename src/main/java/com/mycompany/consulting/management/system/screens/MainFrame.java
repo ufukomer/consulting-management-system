@@ -7,7 +7,7 @@
 package com.mycompany.consulting.management.system.screens;
 
 import com.mycompany.consulting.management.system.service.ProjectService;
-
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author MelihKerman
@@ -76,10 +76,9 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
-        DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"id","Project Name" , "Sector" , "Min Per.", "Max Par.", 
-    "Project Manager Number" , "Analist Number" , "Designer Number" , "Developer Number" , "Tester Number","Started Date","Ready To Start"},0);
+        
         ProjectService projectService=new ProjectService();
-        projectService.addAllActiveProjectToTable(jTable1, );
+        projectService.addAllActiveProjectToTable(jTable1,tableModel);
         jTable1.add(this, evt);
     }//GEN-LAST:event_formWindowActivated
 

@@ -20,10 +20,13 @@ public interface CompanyDao {
     
     public List<CompanyBean> getAllCompanies()throws ClassNotFoundException, SQLException;
     
+    
     public boolean addCompany(CompanyBean bean) throws ClassNotFoundException, SQLException;
     
     public CompanyBean getCompanyByName(String name)throws ClassNotFoundException, SQLException;
     
     public CompanyBean getCompanyBySector(String sector)throws ClassNotFoundException, SQLException;
+    
+    
     
 }

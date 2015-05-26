@@ -26,7 +26,7 @@ public class NewMain {
         personnelBean.setEmail("om@hot");
         personnelBean.setIsWorking(false);
         personnelBean.setSalary(10000);
-        personnelBean.setRole("tasimaci");
+        personnelBean.setRole("Project Manager");
         personnelBean.setPassword("122222");
         PersonnelDaoIml personnelDaoIml = new PersonnelDaoIml();
         //personnelDaoIml.addPersonnel(personnelBean);

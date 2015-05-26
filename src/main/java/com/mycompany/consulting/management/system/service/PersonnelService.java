@@ -45,4 +45,13 @@ public class PersonnelService {
     public List<PersonnelBean> getFreePersonnelByRole(String role){
         return daoIml.getFreePersonnelByRole(role);
     }
+    
+    public boolean updateWorkingStatus(String username,boolean isWorking){
+        return daoIml.updateWorkingStatus(username,isWorking);
+    }
+    
+    public boolean setPersonnelProjectId(int projectId, String email) {
+        return daoIml.setPersonnelProjectId(projectId, email);
+    }
 }
+

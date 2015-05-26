@@ -40,8 +40,25 @@ public class ProjectService {
         return daoIml.getAllProject();
     }
     
+    public List<ProjectBean> getAllActiveProject(){
+        return daoIml.getAllActiveProject();
+    }
+    
     public void addAllProjectToTable(JTable table, DefaultTableModel tableModel){
         List<ProjectBean> projectList = getAllProjectList();
+        
+        if(!projectList.isEmpty()){
+            table.setModel(tableModel);
+            for(ProjectBean projectBean : projectList)
+                tableModel.addRow(new Object[]{projectBean.getId(),projectBean.getName(),projectBean.getSector(),projectBean.getMinimumPersonelNumber()
+                ,projectBean.getMaximumPersonelNumber(),projectBean.getProjectManagerNumber(),projectBean.getAnalistNumber()
+                ,projectBean.getDesignerNumber(),projectBean.getDeveloperNumber(), projectBean.getTesterNumber(),projectBean.getStartedDate()
+                ,projectBean.isReadyToStart()});
+        }
+    }
+    
+    public void addAllActiveProjectToTable(JTable table, DefaultTableModel tableModel){
+        List<ProjectBean> projectList = getAllActiveProject();
         
         if(!projectList.isEmpty()){
             table.setModel(tableModel);

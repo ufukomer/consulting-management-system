@@ -26,9 +26,7 @@ public interface ProjectDao {
 
     public List<ProjectBean> getAllProject();
     
-    public boolean projectManagerOperation(ProjectBean projectBean);
-    
-   
+    public List<ProjectBean> getAllPassiveProject();
     
     public List<ProjectBean> getAllActiveProject();
 }

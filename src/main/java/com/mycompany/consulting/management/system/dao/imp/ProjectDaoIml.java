@@ -232,68 +232,102 @@ public class ProjectDaoIml implements ProjectDao {
         return allProject;
     }
     
-    /*public boolean updateRequirementsByRole(String role, String email) {
-        
-        String roleString = String.valueOf(role) + "number";
-        
-        String sql = "UPDATE project SET " + roleString + " =? WHERE email='" + email + "'";
-        
-        try {
-            
-            prestmt = conn.prepareStatement(sql);
-            prestmt.setInt(1, roleString);
-            prestmt.executeUpdate();
-
-        } catch (SQLException ex) {
-            Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        } finally {
-
-            try {
-                conn.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        return true;
-    }*/
-
-    /*public boolean updateRequirementsByRole(String role, String email) {
-        
-        String roleString = String.valueOf(role) + "number";
-        
-        String sql = "UPDATE project SET " + roleString + " =? WHERE email='" + email + "'";
-        
-        try {
-            
-            prestmt = conn.prepareStatement(sql);
-            prestmt.setInt(1, roleString);
-            prestmt.executeUpdate();
-
-        } catch (SQLException ex) {
-            Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        } finally {
-
-            try {
-                conn.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        return true;
-    }*/
-    
     @Override
-    public boolean projectManagerOperation(ProjectBean projectBean) {
-      
-        
-        
-        
-        
-        return false;
-    }
+    public List<ProjectBean> getAllPassiveProject() {
+                List<ProjectBean> allProject = null;
+        ProjectBean projectBean = null;
+            try {
+                conn = new ConnectionControlBean().getConnection();
+                logger.info("Started the getting all project ");
+                
+                String getAllProject = "Select * from project where readyToStart = true";
+                prestmt = conn.prepareStatement(getAllProject);
+                result = prestmt.executeQuery();
+                
+                allProject = new ArrayList<>();
+                while (result.next()) {
+                    projectBean = new ProjectBean();
+                    projectBean.setId(result.getInt("id"));
+                    projectBean.setName(result.getString("name"));
+                    projectBean.setSector(result.getString("sector"));
+                    projectBean.setMinimumPersonelNumber(result.getInt("min"));
+                    projectBean.setMaximumPersonelNumber(result.getInt("max"));
+                    projectBean.setProjectManagerNumber(result.getInt("projectManagerNumber"));
+                    projectBean.setAnalistNumber(result.getInt("analistNumber"));
+                    projectBean.setDesignerNumber(result.getInt("designerNumber"));
+                    projectBean.setDeveloperNumber(result.getInt("developerNumber"));
+                    projectBean.setTesterNumber(result.getInt("testerNumber"));
+                    projectBean.setReadyToStart(result.getBoolean("readyToStart"));
+                    projectBean.setStartedDate(result.getDate("startedDate"));
+                    projectBean.setReadyToStart(result.getBoolean("readyToStart"));
+                    allProject.add(projectBean);
+                }
+        } catch (Exception ex) {
 
+            Logger.getLogger(ProjectDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+                try { 
+                    if(conn != null)
+                        conn.close();
+                    if(conn != null)
+                        prestmt.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ProjectDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return allProject;
+    }
+    /*public boolean updateRequirementsByRole(String role, String email) {
+        
+        String roleString = String.valueOf(role) + "number";
+        
+        String sql = "UPDATE project SET " + roleString + " =? WHERE email='" + email + "'";
+        
+        try {
+            
+            prestmt = conn.prepareStatement(sql);
+            prestmt.setInt(1, roleString);
+            prestmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } finally {
+
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return true;
+    }*/
+
+    /*public boolean updateRequirementsByRole(String role, String email) {
+        
+        String roleString = String.valueOf(role) + "number";
+        
+        String sql = "UPDATE project SET " + roleString + " =? WHERE email='" + email + "'";
+        
+        try {
+            
+            prestmt = conn.prepareStatement(sql);
+            prestmt.setInt(1, roleString);
+            prestmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } finally {
+
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        return true;
+    }*/
 }

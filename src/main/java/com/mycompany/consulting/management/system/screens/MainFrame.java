@@ -7,6 +7,12 @@ package com.mycompany.consulting.management.system.screens;
 
 import com.mycompany.consulting.management.system.service.PersonnelService;
 import com.mycompany.consulting.management.system.service.ProjectService;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -16,18 +22,22 @@ import javax.swing.table.DefaultTableModel;
 public class MainFrame extends javax.swing.JFrame {
 
     DefaultTableModel tableModel;
-
-    DefaultTableModel tableModel2  ;
-
-    DefaultTableModel tableModel3 ;
-    DefaultTableModel tableModel4 ;
+    DefaultTableModel tableModel2;
+    DefaultTableModel tableModel3;
+    DefaultTableModel tableModel4;
 
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
-
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            SwingUtilities.updateComponentTreeUI(this);
+            this.pack();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -61,6 +71,7 @@ public class MainFrame extends javax.swing.JFrame {
         jTable4 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Bilsor");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
@@ -304,20 +315,20 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        
-        
+
         tableModel = new DefaultTableModel(new Object[]{"id", "Project Name", "Sector", "Min Per.", "Max Par.",
-        "Project Manager Number", "Analyst Number", "Designer Number", "Developer Number", "Tester Number", "Started Date"}, 0);
+            "Project Manager Number", "Analyst Number", "Designer Number", "Developer Number", "Tester Number", "Started Date"}, 0);
 
-    tableModel2 = new DefaultTableModel(new Object[]{"id", "Project Name", "Sector", "Min Per.", "Max Par.",
-        "Project Manager Number", "Analyst Number", "Designer Number", "Developer Number", "Tester Number", "Started Date"}, 0);
+        tableModel2 = new DefaultTableModel(new Object[]{"id", "Project Name", "Sector", "Min Per.", "Max Par.",
+            "Project Manager Number", "Analyst Number", "Designer Number", "Developer Number", "Tester Number", "Started Date"}, 0);
 
-    tableModel3 = new DefaultTableModel(new Object[]{"id", "Name", "Surname", "Email", "Role"}, 0);
-    tableModel4 = new DefaultTableModel(new Object[]{"id", "Name", "Surname", "Email", "Role"}, 0);
-        
+        tableModel3 = new DefaultTableModel(new Object[]{"id", "Name", "Surname", "Email", "Role"}, 0);
+        tableModel4 = new DefaultTableModel(new Object[]{"id", "Name", "Surname", "Email", "Role"}, 0);
+
         ProjectService projectService = new ProjectService();
         projectService.addAllPassiveProjectToTable(jTable1, tableModel);
         jTable1.setModel(tableModel);
@@ -333,16 +344,30 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+
+        try {
+            PersonnelService personnelService = new PersonnelService();
+
+            int id = Integer.parseInt(jTable4.getModel().getValueAt(jTable4.getSelectedRow(), 0).toString());
+            if (!personnelService.isPersonnelActive(id)) {
+                personnelService.deletePersonnel(id);
+            }
+            formWindowActivated(null);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, "Personnel working status is not appropriate!");
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-
+        try {
         ProjectService projectService = new ProjectService();
         projectService.projectRoleOperation(Integer.parseInt(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0).toString()));
         System.out.println(Integer.parseInt(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0).toString()));
         formWindowActivated(null);
+        JOptionPane.showMessageDialog(rootPane, "Project has started.");
+        }catch(Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, "Please select a passive project.");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -352,13 +377,18 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        ProjectService projectService = new ProjectService();
+        try {
+            ProjectService projectService = new ProjectService();
 
         int id = Integer.parseInt(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0).toString());
         if (!projectService.isProjectActive(id)) {
             projectService.deleteProject(id);
         }
         formWindowActivated(null);
+        }catch(Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, "Please select a passive project.");
+        }
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

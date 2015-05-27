@@ -25,10 +25,11 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="Bilsor"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -113,12 +114,28 @@
         </Component>
         <Component class="javax.swing.JComboBox" name="sectorField">
           <Properties>
+            <Property name="maximumRowCount" type="int" value="20"/>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
+              <StringArray count="19">
+                <StringItem index="0" value="Yaz&#x131;l&#x131;m"/>
+                <StringItem index="1" value="Elektrik ve Telekom&#xfc;nikasyon"/>
+                <StringItem index="2" value="Otomotiv Sekt&#xf6;r&#xfc; Deri ve Deri &#xdc;r&#xfc;nleri"/>
+                <StringItem index="3" value="Ayakkab&#x131; Yan Sanayi ve Suni Deri"/>
+                <StringItem index="4" value="Kimya"/>
+                <StringItem index="5" value="G&#x131;da"/>
+                <StringItem index="6" value="Otomotiv"/>
+                <StringItem index="7" value="Makine &#x130;malat Sanayi"/>
+                <StringItem index="8" value="Plastik ve Kau&#xe7;uk Sanayi Giyim E&#x15f;yas&#x131; &#x130;malat&#x131;"/>
+                <StringItem index="9" value="Sanayi"/>
+                <StringItem index="10" value="Elektronik &#xdc;r&#xfc;nler"/>
+                <StringItem index="11" value="Elektrikli Te&#xe7;hizat &#x130;malat&#x131; "/>
+                <StringItem index="12" value="Tekstil &#x130;malat&#x131;"/>
+                <StringItem index="13" value="Mineral &#xdc;r&#xfc;nleri &#x130;malat&#x131; "/>
+                <StringItem index="14" value="Mobilya &#x130;malat&#x131;"/>
+                <StringItem index="15" value="Deri ve Deri &#xdc;r&#xfc;nleri &#x130;malat&#x131; Sanayi"/>
+                <StringItem index="16" value="Kimyasallar ve Kimyasal &#xdc;r&#xfc;nler"/>
+                <StringItem index="17" value="&#x130;malat&#x131; Sanayi"/>
+                <StringItem index="18" value="Ka&#x11f;&#x131;t &#xdc;r&#xfc;nleri"/>
               </StringArray>
             </Property>
           </Properties>

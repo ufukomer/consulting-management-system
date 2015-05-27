@@ -94,5 +94,9 @@ public class PersonnelService {
                 tableModel.addRow(new Object[]{personnelBean.getId(),personnelBean.getName(), personnelBean.getSurname(), personnelBean.getEmail(),personnelBean.getRole()});
         }
     }
+    
+    public boolean isPersonnelActive(int id) {
+        return daoIml.isPersonnelActive(id);
+    }
 }
 

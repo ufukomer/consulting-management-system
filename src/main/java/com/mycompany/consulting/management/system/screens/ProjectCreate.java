@@ -5,9 +5,20 @@
  */
 package com.mycompany.consulting.management.system.screens;
 
+import com.mycompany.consulting.management.system.bean.CompanyBean;
 import com.mycompany.consulting.management.system.bean.ProjectBean;
 import com.mycompany.consulting.management.system.dao.ProjectDao;
 import com.mycompany.consulting.management.system.dao.imp.ProjectDaoIml;
+import com.mycompany.consulting.management.system.service.CompanyService;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -15,14 +26,40 @@ import com.mycompany.consulting.management.system.dao.imp.ProjectDaoIml;
  */
 public class ProjectCreate extends javax.swing.JFrame {
 
-    ProjectDao dao;
+    DefaultComboBoxModel<CompanyBean> defaultComboBoxModel;
     
+    ProjectDao dao;
+
     /**
      * Creates new form ProjectCreate
      */
     public ProjectCreate() {
-        initComponents();     
+        initComponents();
         dao = new ProjectDaoIml();
+        
+        CompanyService companyService = new CompanyService();
+        defaultComboBoxModel = new DefaultComboBoxModel<CompanyBean>();
+        List<CompanyBean> list = null;
+        try {
+            list = companyService.getAllCompanies();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProjectCreate.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectCreate.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        for (int i = 0; i < list.size(); i++) {
+            defaultComboBoxModel.addElement(list.get(i));
+        }
+        jComboBox1.setModel(defaultComboBoxModel);
+        
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            SwingUtilities.updateComponentTreeUI(this);
+            this.pack();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(ProjectCreate.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -53,14 +90,18 @@ public class ProjectCreate extends javax.swing.JFrame {
         designerSpinner = new javax.swing.JSpinner();
         developerSpinner = new javax.swing.JSpinner();
         testerSpinner = new javax.swing.JSpinner();
+        jLabel10 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Bilsor");
 
         jLabel1.setText("Project Name:");
 
         jLabel2.setText("Sector:");
 
-        sectorCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Sector1", "Sector2", "Sector3", "Sector4", "" }));
+        sectorCombo.setMaximumRowCount(30);
+        sectorCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Yazılım", "Elektrik ve Telekomünikasyon", "Otomotiv Sektörü Deri ve Deri Ürünleri", "Ayakkabı Yan Sanayi ve Suni Deri", "Kimya", "Gıda", "Otomotiv", "Makine İmalat Sanayi", "Plastik ve Kauçuk Sanayi Giyim Eşyası İmalatı", "Sanayi", "Elektronik Ürünler", "Elektrikli Teçhizat İmalatı ", "Tekstil İmalatı", "Mineral Ürünleri İmalatı ", "Mobilya İmalatı", "Deri ve Deri Ürünleri İmalatı Sanayi", "Kimyasallar ve Kimyasal Ürünler", "İmalatı Sanayi", "Kağıt Ürünleri" }));
 
         jLabel3.setText("Min Per.");
 
@@ -83,6 +124,10 @@ public class ProjectCreate extends javax.swing.JFrame {
 
         jLabel9.setText("Tester Number:");
 
+        jLabel10.setText("Company");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,6 +139,7 @@ public class ProjectCreate extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel10)
                     .addComponent(jLabel9)
                     .addComponent(jLabel8)
                     .addComponent(jLabel6)
@@ -119,7 +165,8 @@ public class ProjectCreate extends javax.swing.JFrame {
                         .addComponent(developerSpinner, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(designerSpinner, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(analistSpinner, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(projectManagerSpinner, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addComponent(projectManagerSpinner, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -159,29 +206,41 @@ public class ProjectCreate extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(testerSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(createProject)
                 .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void createProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createProjectActionPerformed
-        // TODO add your handling code here:
-        ProjectBean bean = new ProjectBean();
-        bean.setName(projectName.getText());
-        bean.setSector(sectorCombo.getItemAt(sectorCombo.getSelectedIndex()).toString());
-        bean.setMinimumPersonelNumber(Integer.valueOf(min.getText()));
-        bean.setMaximumPersonelNumber(Integer.valueOf(max.getText()));
-        //all spinner
-        bean.setProjectManagerNumber((int) projectManagerSpinner.getValue());
-        bean.setAnalystNumber((int) analistSpinner.getValue());
-        bean.setDesignerNumber((int) designerSpinner.getValue());
-        bean.setTesterNumber((int) testerSpinner.getValue());
-        bean.setDeveloperNumber((int) developerSpinner.getValue());
-        
-        dao.addProject(bean);
+
+        try {
+            ProjectBean bean = new ProjectBean();
+            bean.setName(projectName.getText());
+            bean.setSector(sectorCombo.getItemAt(sectorCombo.getSelectedIndex()).toString());
+            bean.setMinimumPersonelNumber(Integer.valueOf(min.getText()));
+            bean.setMaximumPersonelNumber(Integer.valueOf(max.getText()));
+            //all spinner
+            bean.setProjectManagerNumber((int) projectManagerSpinner.getValue());
+            bean.setAnalystNumber((int) analistSpinner.getValue());
+            bean.setDesignerNumber((int) designerSpinner.getValue());
+            bean.setTesterNumber((int) testerSpinner.getValue());
+            bean.setDeveloperNumber((int) developerSpinner.getValue());
+
+            dao.addProject(bean);
+            
+            this.dispose();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(createProject, "Wrong input!");
+        }
+
     }//GEN-LAST:event_createProjectActionPerformed
 
     /**
@@ -224,7 +283,9 @@ public class ProjectCreate extends javax.swing.JFrame {
     private javax.swing.JButton createProject;
     private javax.swing.JSpinner designerSpinner;
     private javax.swing.JSpinner developerSpinner;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

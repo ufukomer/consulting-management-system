@@ -39,4 +39,6 @@ public interface PersonnelDao {
     public List<PersonnelBean> getAllActivePersonnel();
     
     public List<PersonnelBean> getAllPassivePersonnel();
+    
+    public boolean isPersonnelActive(int id);
 }

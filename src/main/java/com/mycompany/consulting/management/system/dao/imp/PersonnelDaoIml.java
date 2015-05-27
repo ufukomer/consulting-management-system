@@ -524,4 +524,39 @@ public class PersonnelDaoIml implements PersonnelDao {
 
         return true;
     }
+
+    @Override
+    public boolean isPersonnelActive(int id) {
+        
+        boolean isWorking = false;
+        try {
+            conn = new ConnectionControlBean().getConnection();
+            logger.info("Started the getting project from database");
+
+            String getProjectSql = "Select isWorking from personnel where id = ?";
+            prestmt = conn.prepareStatement(getProjectSql);
+            prestmt.setInt(1, id);
+            rs = prestmt.executeQuery();
+            
+            while (rs.next()) {
+                isWorking = rs.getBoolean("isWorking");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProjectDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProjectDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+                if (conn != null) {
+                    prestmt.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ProjectDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return isWorking;
+    }
 }

@@ -48,7 +48,10 @@ public class CompanyBean {
     public void setSector(String sector) {
         this.sector = sector;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return name;
+    }
     
 }

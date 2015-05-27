@@ -11,6 +11,9 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -23,6 +26,13 @@ public class PersonnelCreate extends javax.swing.JFrame {
      */
     public PersonnelCreate() {
         initComponents();
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            SwingUtilities.updateComponentTreeUI(this);
+            this.pack();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(PersonnelCreate.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -53,7 +63,7 @@ public class PersonnelCreate extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("New User");
+        setTitle("Bilsor");
 
         jLabel6.setText("Role:");
 
@@ -197,13 +207,14 @@ public class PersonnelCreate extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         PersonnelService personnelService = new PersonnelService();
         PersonnelBean personnelBean;
-        
+
         try {
 
             String name = namefield.getText();
@@ -227,11 +238,13 @@ public class PersonnelCreate extends javax.swing.JFrame {
                 personnelBean.setIsWorking(false);
                 personnelService.addPersonnel(personnelBean);
             }
-
+            this.dispose();
         } catch (Exception ex) {
             Logger.getLogger(PersonnelService.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(rootPane, "Wrong input!");
-        }
+        } 
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void rolefieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rolefieldActionPerformed

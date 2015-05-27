@@ -70,6 +70,20 @@ public class ProjectService {
         }
     }
     
+      public void addAllPassiveProjectToTable(JTable table, DefaultTableModel tableModel){
+        List<ProjectBean> projectList = getAllPassiveProject();
+        
+        if(!projectList.isEmpty()){
+            table.setModel(tableModel);
+            for(ProjectBean projectBean : projectList)
+                tableModel.addRow(new Object[]{projectBean.getId(),projectBean.getName(),projectBean.getSector(),projectBean.getMinimumPersonelNumber()
+                ,projectBean.getMaximumPersonelNumber(),projectBean.getProjectManagerNumber(),projectBean.getAnalystNumber()
+                ,projectBean.getDesignerNumber(),projectBean.getDeveloperNumber(), projectBean.getTesterNumber(),projectBean.getStartedDate()
+                ,projectBean.isReadyToStart()});
+        }
+    }
+    
+    
     public List<ProjectBean> getAllPassiveProject() {
         return daoIml.getAllPassiveProject();
     }
@@ -80,5 +94,13 @@ public class ProjectService {
     
     public boolean projectRoleOperation(int projectId) {
         return daoIml.projectRoleOperation(projectId);
+    }
+    
+    public boolean updateProjectDateById(int id) {
+        return daoIml.updateProjectDateById(id);
+    }
+    
+    public boolean isProjectActive(int id) {
+        return daoIml.isProjectActive(id);
     }
 }

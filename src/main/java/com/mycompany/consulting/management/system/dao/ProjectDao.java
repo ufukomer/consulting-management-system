@@ -33,4 +33,8 @@ public interface ProjectDao {
     public boolean projectRoleOperation(int projectId);
     
     public boolean updateProjectStatus(int projectId, boolean updateStatus);
+    
+    public boolean updateProjectDateById(int id);
+    
+    public boolean isProjectActive(int id);
 }

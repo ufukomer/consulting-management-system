@@ -21,6 +21,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class MainFrame extends javax.swing.JFrame {
 
+    public static int projectId;
+
     DefaultTableModel tableModel;
     DefaultTableModel tableModel2;
     DefaultTableModel tableModel3;
@@ -60,6 +62,7 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -133,6 +136,13 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel2.setText("Active Project");
 
+        jButton6.setText("Get Personnels");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -144,7 +154,10 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1266, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(61, 61, 61)
-                        .addComponent(jLabel2)))
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton6)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -154,7 +167,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton6)
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(new javax.swing.border.MatteBorder(null));
@@ -321,7 +336,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
 
         tableModel = new DefaultTableModel(new Object[]{"id", "Project Name", "Sector", "Min Per.", "Max Par.",
-            "Project Manager Number", "Analyst Number", "Designer Number", "Developer Number", "Tester Number", "Started Date"}, 0);
+            "Project Manager Number", "Analyst Number", "Designer Number", "Developer Number", "Tester Number"}, 0);
 
         tableModel2 = new DefaultTableModel(new Object[]{"id", "Project Name", "Sector", "Min Per.", "Max Par.",
             "Project Manager Number", "Analyst Number", "Designer Number", "Developer Number", "Tester Number", "Started Date"}, 0);
@@ -360,12 +375,12 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-        ProjectService projectService = new ProjectService();
-        projectService.projectRoleOperation(Integer.parseInt(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0).toString()));
-        System.out.println(Integer.parseInt(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0).toString()));
-        formWindowActivated(null);
-        JOptionPane.showMessageDialog(rootPane, "Project has started.");
-        }catch(Exception ex) {
+            ProjectService projectService = new ProjectService();
+            projectService.projectRoleOperation(Integer.parseInt(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0).toString()));
+            System.out.println(Integer.parseInt(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0).toString()));
+            formWindowActivated(null);
+            JOptionPane.showMessageDialog(rootPane, "Project has started.");
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(rootPane, "Please select a passive project.");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -380,15 +395,15 @@ public class MainFrame extends javax.swing.JFrame {
         try {
             ProjectService projectService = new ProjectService();
 
-        int id = Integer.parseInt(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0).toString());
-        if (!projectService.isProjectActive(id)) {
-            projectService.deleteProject(id);
-        }
-        formWindowActivated(null);
-        }catch(Exception ex) {
+            int id = Integer.parseInt(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0).toString());
+            if (!projectService.isProjectActive(id)) {
+                projectService.deleteProject(id);
+            }
+            formWindowActivated(null);
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(rootPane, "Please select a passive project.");
         }
-        
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -396,6 +411,20 @@ public class MainFrame extends javax.swing.JFrame {
         personnelCreate.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         personnelCreate.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+
+        try {
+            projectId = Integer.parseInt(jTable2.getModel().getValueAt(jTable2.getSelectedRow(), 0).toString());
+            PersonnelTable personnelTable = new PersonnelTable();
+            personnelTable.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            personnelTable.setVisible(true);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, "Please select an active project.");
+        }
+
+
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -438,6 +467,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

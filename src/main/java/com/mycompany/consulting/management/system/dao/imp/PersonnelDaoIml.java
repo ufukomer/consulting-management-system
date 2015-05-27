@@ -559,4 +559,48 @@ public class PersonnelDaoIml implements PersonnelDao {
         }
         return isWorking;
     }
+
+    @Override
+    public List<PersonnelBean> getAllPersonnelByProjectId(int projectId) {
+        List<PersonnelBean> personnelList = new ArrayList<>();
+        try {
+            conn = new ConnectionControlBean().getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+
+            String sql = "select * from personnel where projectId='" + projectId + "'";
+            prestmt = conn.prepareStatement(sql);
+            rs = prestmt.executeQuery(sql);
+
+            while (rs.next()) {
+                personnelList.add(new PersonnelBean(rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("surname"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("role"),
+                        rs.getInt("salary"),
+                        rs.getBoolean("isWorking")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+                if (prestmt != null) {
+                    prestmt.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return personnelList;
+    }
 }

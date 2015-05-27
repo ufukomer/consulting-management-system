@@ -47,8 +47,8 @@ public class ProjectDaoIml implements ProjectDao {
         try {
 
             conn = new ConnectionControlBean().getConnection();
-            String insertSql = "insert into project (name , sector , min , max,projectManagerNumber,"
-                    + "analystNumber,designerNumber,developerNumber,testerNumber,readyToStart) values(?,?,?,?,?,?,?,?,?,?)";
+            String insertSql = "insert into project (startedDate,name , sector , min , max,projectManagerNumber,"
+                    + "analystNumber,designerNumber,developerNumber,testerNumber,readyToStart) values(CURDATE(),?,?,?,?,?,?,?,?,?,?)";
             prestmt = conn.prepareStatement(insertSql);
             prestmt.setString(1, projectbean.getName());
             prestmt.setString(2, projectbean.getSector());

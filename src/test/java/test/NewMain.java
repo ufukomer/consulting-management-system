@@ -20,8 +20,11 @@ public class NewMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       ProjectService projectService=new ProjectService();
-       projectService.projectRoleOperation(1);
+       //ProjectService projectService=new ProjectService();
+       //projectService.projectRoleOperation(1);
+       
+        PersonnelDaoIml personnelDaoIml = new PersonnelDaoIml();
+        System.out.println(personnelDaoIml.getAllPersonnelByProjectId(9));
     }
     
 }

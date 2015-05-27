@@ -98,5 +98,20 @@ public class PersonnelService {
     public boolean isPersonnelActive(int id) {
         return daoIml.isPersonnelActive(id);
     }
+    
+    public List<PersonnelBean> getAllPersonnelByProjectId(int projectId) {
+        return daoIml.getAllPersonnelByProjectId(projectId);
+    }
+    
+    
+    public void addAllProjectPersonnelToTable(JTable table, DefaultTableModel tableModel, int projectId){
+        List<PersonnelBean> personnelList = getAllPersonnelByProjectId(projectId);
+        
+        if(!personnelList.isEmpty()){
+            table.setModel(tableModel);
+            for(PersonnelBean personnelBean : personnelList)
+                tableModel.addRow(new Object[]{personnelBean.getId(),personnelBean.getName(), personnelBean.getSurname(), personnelBean.getEmail(),personnelBean.getRole()});
+        }
+    }
 }
 

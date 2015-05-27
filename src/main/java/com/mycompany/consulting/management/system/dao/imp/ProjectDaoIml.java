@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -47,7 +48,7 @@ public class ProjectDaoIml implements ProjectDao {
 
             conn = new ConnectionControlBean().getConnection();
             String insertSql = "insert into project (name , sector , min , max,projectManagerNumber,"
-                    + "analystNumber,designerNumber,developerNumber,testerNumber) values(?,?,?,?,?,?,?,?,?)";
+                    + "analystNumber,designerNumber,developerNumber,testerNumber,readyToStart) values(?,?,?,?,?,?,?,?,?,?)";
             prestmt = conn.prepareStatement(insertSql);
             prestmt.setString(1, projectbean.getName());
             prestmt.setString(2, projectbean.getSector());
@@ -58,6 +59,7 @@ public class ProjectDaoIml implements ProjectDao {
             prestmt.setString(7, String.valueOf(projectbean.getDesignerNumber()));
             prestmt.setString(8, String.valueOf(projectbean.getDeveloperNumber()));
             prestmt.setString(9, String.valueOf(projectbean.getTesterNumber()));
+            prestmt.setBoolean(10, false);
             isInsert = prestmt.execute();
         } catch (Exception ex) {
             Logger.getLogger(ProjectDaoIml.class.getName()).log(Level.SEVERE, null, ex);
@@ -329,6 +331,8 @@ public class ProjectDaoIml implements ProjectDao {
                 personnelService.setPersonnelProjectOperation(projectId, "Tester", projectBean.getTesterNumber());
                 projectService.updateProjectStatus(projectId, true);
                 logger.info("ProjectRoleOperation completed with Project Id: " + projectId);
+            } else {
+                JOptionPane.showMessageDialog(null, "Hata!");
             }
 
         } catch (Exception ex) {

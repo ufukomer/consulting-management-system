@@ -36,4 +36,7 @@ public interface PersonnelDao {
     
     boolean setPersonnelProjectOperation(int projectId, String role, int requestCount);
     
+    public List<PersonnelBean> getAllActivePersonnel();
+    
+    public List<PersonnelBean> getAllPassivePersonnel();
 }

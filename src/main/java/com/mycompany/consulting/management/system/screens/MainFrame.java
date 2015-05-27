@@ -3,26 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.mycompany.consulting.management.system.screens;
 
+import com.mycompany.consulting.management.system.service.PersonnelService;
 import com.mycompany.consulting.management.system.service.ProjectService;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author MelihKerman
  */
 public class MainFrame extends javax.swing.JFrame {
-    DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"id","Project Name" , "Sector" , "Min Per.", "Max Par.", 
-    "Project Manager Number" , "Analyst Number" , "Designer Number" , "Developer Number" , "Tester Number","Started Date"},0);
-    
-    DefaultTableModel tableModel2 = new DefaultTableModel(new Object[]{"id","Project Name" , "Sector" , "Min Per.", "Max Par.", 
-    "Project Manager Number" , "Analyst Number" , "Designer Number" , "Developer Number" , "Tester Number","Started Date"},0);
+
+    DefaultTableModel tableModel;
+
+    DefaultTableModel tableModel2  ;
+
+    DefaultTableModel tableModel3 ;
+    DefaultTableModel tableModel4 ;
+
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
+
     }
 
     /**
@@ -148,6 +153,11 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel4.setText("Passive Personnels");
 
         jButton2.setText("Personel Create");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Personnel Delete");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -297,14 +307,29 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        // TODO add your handling code here:
         
-        ProjectService projectService=new ProjectService();
+        
+        tableModel = new DefaultTableModel(new Object[]{"id", "Project Name", "Sector", "Min Per.", "Max Par.",
+        "Project Manager Number", "Analyst Number", "Designer Number", "Developer Number", "Tester Number", "Started Date"}, 0);
+
+    tableModel2 = new DefaultTableModel(new Object[]{"id", "Project Name", "Sector", "Min Per.", "Max Par.",
+        "Project Manager Number", "Analyst Number", "Designer Number", "Developer Number", "Tester Number", "Started Date"}, 0);
+
+    tableModel3 = new DefaultTableModel(new Object[]{"id", "Name", "Surname", "Email", "Role"}, 0);
+    tableModel4 = new DefaultTableModel(new Object[]{"id", "Name", "Surname", "Email", "Role"}, 0);
+        
+        ProjectService projectService = new ProjectService();
         projectService.addAllPassiveProjectToTable(jTable1, tableModel);
         jTable1.setModel(tableModel);
-        
+
         projectService.addAllActiveProjectToTable(jTable2, tableModel2);
         jTable2.setModel(tableModel2);
+
+        PersonnelService personnelService = new PersonnelService();
+        personnelService.addAllActiveProjectToTable(jTable3, tableModel3);
+        personnelService.addAllPassiveProjectToTable(jTable4, tableModel4);
+
+
     }//GEN-LAST:event_formWindowActivated
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -315,9 +340,9 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         ProjectService projectService = new ProjectService();
-        projectService.projectRoleOperation(Integer.parseInt(jTable1.getModel().getValueAt(jTable1.getSelectedRow(),0).toString()));
-        System.out.println(Integer.parseInt(jTable1.getModel().getValueAt(jTable1.getSelectedRow(),0).toString()));
-
+        projectService.projectRoleOperation(Integer.parseInt(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0).toString()));
+        System.out.println(Integer.parseInt(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0).toString()));
+        formWindowActivated(null);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -328,13 +353,19 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         ProjectService projectService = new ProjectService();
-        
-        int id = Integer.parseInt(jTable1.getModel().getValueAt(jTable1.getSelectedRow(),0).toString());
-        if(!projectService.isProjectActive(id)) {
+
+        int id = Integer.parseInt(jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0).toString());
+        if (!projectService.isProjectActive(id)) {
             projectService.deleteProject(id);
         }
-            
+        formWindowActivated(null);
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        PersonnelCreate personnelCreate = new PersonnelCreate();
+        personnelCreate.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        personnelCreate.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

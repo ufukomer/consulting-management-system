@@ -9,6 +9,8 @@ package com.mycompany.consulting.management.system.service;
 import com.mycompany.consulting.management.system.bean.PersonnelBean;
 import com.mycompany.consulting.management.system.dao.imp.PersonnelDaoIml;
 import java.util.List;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -42,6 +44,14 @@ public class PersonnelService {
         return daoIml.getAllPersonnel();
     }
     
+    public List<PersonnelBean> getAllActivePersonnel() {
+        return daoIml.getAllActivePersonnel();
+    }
+    
+    public List<PersonnelBean> getAllPassivePersonnel() {
+        return daoIml.getAllPassivePersonnel();
+    }
+    
     public List<PersonnelBean> getFreePersonnelByRole(String role){
         return daoIml.getFreePersonnelByRole(role);
     }
@@ -62,6 +72,27 @@ public class PersonnelService {
     public boolean setPersonnelProjectOperation(int projectId, String role, 
             int requestCount) {
         return daoIml.setPersonnelProjectOperation(projectId, role, requestCount);
+    }
+    
+    public void addAllPassiveProjectToTable(JTable table, DefaultTableModel tableModel){
+        
+        
+        List<PersonnelBean> personnelList = getAllPassivePersonnel();
+        
+        if(!personnelList.isEmpty()){
+            table.setModel(tableModel);
+            for(PersonnelBean personnelBean : personnelList)
+                tableModel.addRow(new Object[]{personnelBean.getId(),personnelBean.getName(), personnelBean.getSurname(), personnelBean.getEmail(),personnelBean.getRole()});
+        }
+    }
+    public void addAllActiveProjectToTable(JTable table, DefaultTableModel tableModel){
+        List<PersonnelBean> personnelList = getAllActivePersonnel();
+        
+        if(!personnelList.isEmpty()){
+            table.setModel(tableModel);
+            for(PersonnelBean personnelBean : personnelList)
+                tableModel.addRow(new Object[]{personnelBean.getId(),personnelBean.getName(), personnelBean.getSurname(), personnelBean.getEmail(),personnelBean.getRole()});
+        }
     }
 }
 

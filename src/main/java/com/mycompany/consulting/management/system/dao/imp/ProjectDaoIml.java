@@ -332,7 +332,7 @@ public class ProjectDaoIml implements ProjectDao {
                 projectService.updateProjectStatus(projectId, true);
                 logger.info("ProjectRoleOperation completed with Project Id: " + projectId);
             } else {
-                JOptionPane.showMessageDialog(null, "Hata!");
+                throw new Exception();
             }
 
         } catch (Exception ex) {

@@ -54,7 +54,7 @@ public class ProjectCreate extends javax.swing.JFrame {
         jComboBox1.setModel(defaultComboBoxModel);
         
         try {
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
             SwingUtilities.updateComponentTreeUI(this);
             this.pack();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
@@ -101,7 +101,7 @@ public class ProjectCreate extends javax.swing.JFrame {
         jLabel2.setText("Sector:");
 
         sectorCombo.setMaximumRowCount(30);
-        sectorCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Yazılım", "Elektrik ve Telekomünikasyon", "Otomotiv Sektörü Deri ve Deri Ürünleri", "Ayakkabı Yan Sanayi ve Suni Deri", "Kimya", "Gıda", "Otomotiv", "Makine İmalat Sanayi", "Plastik ve Kauçuk Sanayi Giyim Eşyası İmalatı", "Sanayi", "Elektronik Ürünler", "Elektrikli Teçhizat İmalatı ", "Tekstil İmalatı", "Mineral Ürünleri İmalatı ", "Mobilya İmalatı", "Deri ve Deri Ürünleri İmalatı Sanayi", "Kimyasallar ve Kimyasal Ürünler", "İmalatı Sanayi", "Kağıt Ürünleri" }));
+        sectorCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Broadcasting", "Film industry", "Internet", "Music industry", "News media", "Publishing", "Automotive industry", "Pulp and paper industry", "Steel industry", "Shipbuilding industry", "Software industry", "Fishing industry", "Timber industry", "Tobacco industry" }));
 
         jLabel3.setText("Min Per.");
 

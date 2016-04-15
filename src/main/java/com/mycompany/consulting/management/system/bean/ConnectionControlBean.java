@@ -10,9 +10,9 @@ public class ConnectionControlBean {
 
     public String myDriver = "com.mysql.jdbc.Driver";
     public final String url = "jdbc:mysql://127.0.0.1/";
-    public final String db = "consultingmanagementsystem";
+    public final String db = "consult";
     public final String user = "root";//ProjectProperties.getProperty("mysql.username");
-    public final String Password = "";// ProjectProperties.getProperty("mysql.password");
+    public final String Password = "root";// ProjectProperties.getProperty("mysql.password");
     private final static Logger LOGGER = Logger.getLogger(ConnectionControlBean.class.getName());
 
     public Connection getConnection() throws ClassNotFoundException {

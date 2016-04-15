@@ -144,26 +144,21 @@
       <Properties>
         <Property name="maximumRowCount" type="int" value="30"/>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="19">
-            <StringItem index="0" value="Yaz&#x131;l&#x131;m"/>
-            <StringItem index="1" value="Elektrik ve Telekom&#xfc;nikasyon"/>
-            <StringItem index="2" value="Otomotiv Sekt&#xf6;r&#xfc; Deri ve Deri &#xdc;r&#xfc;nleri"/>
-            <StringItem index="3" value="Ayakkab&#x131; Yan Sanayi ve Suni Deri"/>
-            <StringItem index="4" value="Kimya"/>
-            <StringItem index="5" value="G&#x131;da"/>
-            <StringItem index="6" value="Otomotiv"/>
-            <StringItem index="7" value="Makine &#x130;malat Sanayi"/>
-            <StringItem index="8" value="Plastik ve Kau&#xe7;uk Sanayi Giyim E&#x15f;yas&#x131; &#x130;malat&#x131;"/>
-            <StringItem index="9" value="Sanayi"/>
-            <StringItem index="10" value="Elektronik &#xdc;r&#xfc;nler"/>
-            <StringItem index="11" value="Elektrikli Te&#xe7;hizat &#x130;malat&#x131; "/>
-            <StringItem index="12" value="Tekstil &#x130;malat&#x131;"/>
-            <StringItem index="13" value="Mineral &#xdc;r&#xfc;nleri &#x130;malat&#x131; "/>
-            <StringItem index="14" value="Mobilya &#x130;malat&#x131;"/>
-            <StringItem index="15" value="Deri ve Deri &#xdc;r&#xfc;nleri &#x130;malat&#x131; Sanayi"/>
-            <StringItem index="16" value="Kimyasallar ve Kimyasal &#xdc;r&#xfc;nler"/>
-            <StringItem index="17" value="&#x130;malat&#x131; Sanayi"/>
-            <StringItem index="18" value="Ka&#x11f;&#x131;t &#xdc;r&#xfc;nleri"/>
+          <StringArray count="14">
+            <StringItem index="0" value="Broadcasting"/>
+            <StringItem index="1" value="Film industry"/>
+            <StringItem index="2" value="Internet"/>
+            <StringItem index="3" value="Music industry"/>
+            <StringItem index="4" value="News media"/>
+            <StringItem index="5" value="Publishing"/>
+            <StringItem index="6" value="Automotive industry"/>
+            <StringItem index="7" value="Pulp and paper industry"/>
+            <StringItem index="8" value="Steel industry"/>
+            <StringItem index="9" value="Shipbuilding industry"/>
+            <StringItem index="10" value="Software industry"/>
+            <StringItem index="11" value="Fishing industry"/>
+            <StringItem index="12" value="Timber industry"/>
+            <StringItem index="13" value="Tobacco industry"/>
           </StringArray>
         </Property>
       </Properties>

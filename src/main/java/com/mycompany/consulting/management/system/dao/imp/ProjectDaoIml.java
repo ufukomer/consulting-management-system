@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.consulting.management.system.dao.imp;
 
 import com.mycompany.consulting.management.system.bean.ConnectionControlBean;
@@ -10,31 +5,28 @@ import com.mycompany.consulting.management.system.bean.ProjectBean;
 import com.mycompany.consulting.management.system.dao.ProjectDao;
 import com.mycompany.consulting.management.system.service.PersonnelService;
 import com.mycompany.consulting.management.system.service.ProjectService;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
-/**
- *
- * @author MelihKerman
- */
 public class ProjectDaoIml implements ProjectDao {
 
     Connection conn;
     PreparedStatement prestmt;
     ConnectionControlBean connectionControl;
     ResultSet result;
-    private static final Logger logger = Logger.getLogger(ProjectDaoIml.class.getName());
+
+    private static final Logger logger =
+            Logger.getLogger(ProjectDaoIml.class.getName());
 
     public ProjectDaoIml() {
 
@@ -42,13 +34,16 @@ public class ProjectDaoIml implements ProjectDao {
 
     @Override
     public boolean addProject(ProjectBean projectbean) {
-        logger.info("Started the adding the project to the database");
-        boolean isInsert = false;
-        try {
 
+        logger.info("Started the adding the project to the database");
+
+        boolean isInsert = false;
+
+        try {
             conn = new ConnectionControlBean().getConnection();
             String insertSql = "insert into project (startedDate,name , sector , min , max,projectManagerNumber,"
-                    + "analystNumber,designerNumber,developerNumber,testerNumber,readyToStart) values(CURDATE(),?,?,?,?,?,?,?,?,?,?)";
+                    + "analystNumber,designerNumber,developerNumber,testerNumber,readyToStart) " +
+                    "values(CURDATE(),?,?,?,?,?,?,?,?,?,?)";
             prestmt = conn.prepareStatement(insertSql);
             prestmt.setString(1, projectbean.getName());
             prestmt.setString(2, projectbean.getSector());
@@ -71,7 +66,7 @@ public class ProjectDaoIml implements ProjectDao {
                 if (prestmt != null) {
                     prestmt.close();
                 }
-                if (isInsert == true) {
+                if (isInsert) {
                     logger.info("Adding the project to database:");
                 }
             } catch (SQLException ex) {
@@ -79,6 +74,7 @@ public class ProjectDaoIml implements ProjectDao {
             }
 
         }
+
         return isInsert;
     }
 
@@ -103,7 +99,7 @@ public class ProjectDaoIml implements ProjectDao {
                 if (conn != null) {
                     prestmt.close();
                 }
-                if (isDeleted == true) {
+                if (isDeleted) {
                     logger.info("Deleting the project from database");
                 }
             } catch (SQLException ex) {
@@ -120,7 +116,9 @@ public class ProjectDaoIml implements ProjectDao {
 
     @Override
     public ProjectBean getProjectById(int id) {
+
         ProjectBean project = null;
+
         try {
             conn = new ConnectionControlBean().getConnection();
             logger.info("Started the getting project from database");
@@ -140,9 +138,7 @@ public class ProjectDaoIml implements ProjectDao {
                 project.setProjectManagerNumber(result.getInt("projectManagerNumber"));
                 project.setTesterNumber(result.getInt("testerNumber"));
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(ProjectDaoIml.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(ProjectDaoIml.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
@@ -161,10 +157,13 @@ public class ProjectDaoIml implements ProjectDao {
 
     @Override
     public List<ProjectBean> getAllProject() {
+
         List<ProjectBean> allProject = null;
         ProjectBean projectBean = null;
+
         try {
             conn = new ConnectionControlBean().getConnection();
+
             logger.info("Started the getting all project ");
 
             String getAllProject = "Select * from project";
@@ -172,6 +171,7 @@ public class ProjectDaoIml implements ProjectDao {
             result = prestmt.executeQuery();
 
             allProject = new ArrayList<>();
+
             while (result.next()) {
                 projectBean = new ProjectBean();
                 projectBean.setId(result.getInt("id"));
@@ -209,8 +209,10 @@ public class ProjectDaoIml implements ProjectDao {
 
     @Override
     public List<ProjectBean> getAllActiveProject() {
+
         List<ProjectBean> allProject = null;
         ProjectBean projectBean = null;
+
         try {
             conn = new ConnectionControlBean().getConnection();
             logger.info("Started the getting all project ");
@@ -220,6 +222,7 @@ public class ProjectDaoIml implements ProjectDao {
             result = prestmt.executeQuery();
 
             allProject = new ArrayList<>();
+
             while (result.next()) {
                 projectBean = new ProjectBean();
                 projectBean.setId(result.getInt("id"));
@@ -257,8 +260,10 @@ public class ProjectDaoIml implements ProjectDao {
 
     @Override
     public List<ProjectBean> getAllPassiveProject() {
+
         List<ProjectBean> allProject = null;
         ProjectBean projectBean = null;
+
         try {
             conn = new ConnectionControlBean().getConnection();
             logger.info("Started the getting all project ");
@@ -268,6 +273,7 @@ public class ProjectDaoIml implements ProjectDao {
             result = prestmt.executeQuery();
 
             allProject = new ArrayList<>();
+
             while (result.next()) {
                 projectBean = new ProjectBean();
                 projectBean.setId(result.getInt("id"));
@@ -308,13 +314,14 @@ public class ProjectDaoIml implements ProjectDao {
 
         PersonnelService personnelService = new PersonnelService();
         ProjectService projectService = new ProjectService();
-        try {
 
+        try {
             int analystCount = personnelService.getFreePersonnelByRole("Analyst").size();
-            int projectManagerCount = personnelService.getFreePersonnelByRole("Project Manager").size();;
-            int designerCount = personnelService.getFreePersonnelByRole("Designer").size();;
-            int developerCount = personnelService.getFreePersonnelByRole("Developer").size();;
-            int testerCount = personnelService.getFreePersonnelByRole("Tester").size();;
+            int projectManagerCount = personnelService.getFreePersonnelByRole("Project Manager").size();
+            int designerCount = personnelService.getFreePersonnelByRole("Designer").size();
+            int developerCount = personnelService.getFreePersonnelByRole("Developer").size();
+            int testerCount = personnelService.getFreePersonnelByRole("Tester").size();
+
 
             ProjectBean projectBean = getProjectById(projectId);
 
@@ -324,12 +331,18 @@ public class ProjectDaoIml implements ProjectDao {
                     && projectBean.getProjectManagerNumber() <= projectManagerCount
                     && projectBean.getTesterNumber() <= testerCount) {
 
-                personnelService.setPersonnelProjectOperation(projectId, "Analyst", projectBean.getAnalystNumber());
-                personnelService.setPersonnelProjectOperation(projectId, "Project Manager", projectBean.getProjectManagerNumber());
-                personnelService.setPersonnelProjectOperation(projectId, "Designer", projectBean.getDesignerNumber());
-                personnelService.setPersonnelProjectOperation(projectId, "Developer", projectBean.getDeveloperNumber());
-                personnelService.setPersonnelProjectOperation(projectId, "Tester", projectBean.getTesterNumber());
+                personnelService.setPersonnelProjectOperation(projectId,
+                        "Analyst", projectBean.getAnalystNumber());
+                personnelService.setPersonnelProjectOperation(projectId,
+                        "Project Manager", projectBean.getProjectManagerNumber());
+                personnelService.setPersonnelProjectOperation(projectId,
+                        "Designer", projectBean.getDesignerNumber());
+                personnelService.setPersonnelProjectOperation(projectId,
+                        "Developer", projectBean.getDeveloperNumber());
+                personnelService.setPersonnelProjectOperation(projectId,
+                        "Tester", projectBean.getTesterNumber());
                 projectService.updateProjectStatus(projectId, true);
+
                 logger.info("ProjectRoleOperation completed with Project Id: " + projectId);
             } else {
                 throw new Exception();
@@ -344,13 +357,13 @@ public class ProjectDaoIml implements ProjectDao {
 
     @Override
     public boolean updateProjectStatus(int projectId, boolean updateStatus) {
-        
+
         try {
             conn = new ConnectionControlBean().getConnection();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         try {
             String sql = "UPDATE project SET readyToStart=? WHERE id='" + projectId + "'";
             prestmt = conn.prepareStatement(sql);
@@ -374,20 +387,20 @@ public class ProjectDaoIml implements ProjectDao {
 
     @Override
     public boolean updateProjectDateById(int id) {
-        
+
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
-        
+
         java.sql.Date datee = new java.sql.Date(id, id, id);
-        
+
         System.out.println(dateFormat.format(date));
-        
+
         try {
             conn = new ConnectionControlBean().getConnection();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         try {
 
             String sql = "UPDATE project SET startedDate=? WHERE id='" + id + "'";
@@ -412,8 +425,9 @@ public class ProjectDaoIml implements ProjectDao {
 
     @Override
     public boolean isProjectActive(int id) {
-        
+
         boolean readyToStart = false;
+
         try {
             conn = new ConnectionControlBean().getConnection();
             logger.info("Started the getting project from database");
@@ -422,13 +436,11 @@ public class ProjectDaoIml implements ProjectDao {
             prestmt = conn.prepareStatement(getProjectSql);
             prestmt.setInt(1, id);
             result = prestmt.executeQuery();
-            
+
             while (result.next()) {
                 readyToStart = result.getBoolean("readyToStart");
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(ProjectDaoIml.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(ProjectDaoIml.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {

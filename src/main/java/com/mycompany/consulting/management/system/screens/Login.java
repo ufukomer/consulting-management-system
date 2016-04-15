@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.consulting.management.system.screens;
 
 import com.mycompany.consulting.management.system.service.LoginService;
@@ -14,10 +9,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-/**
- *
- * @author MelihKerman
- */
 public class Login extends javax.swing.JFrame {
 
     /**
@@ -30,7 +21,8 @@ public class Login extends javax.swing.JFrame {
             UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
             SwingUtilities.updateComponentTreeUI(this);
             this.pack();
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+                UnsupportedLookAndFeelException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

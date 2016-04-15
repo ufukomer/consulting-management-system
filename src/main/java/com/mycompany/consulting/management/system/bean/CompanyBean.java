@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.consulting.management.system.bean;
 
-/**
- *
- * @author semih
- */
 public class CompanyBean {
 
     public CompanyBean(int id, String name, String sector) {
@@ -16,7 +7,7 @@ public class CompanyBean {
         this.name = name;
         this.sector = sector;
     }
-    
+
     private int id;
     private String name;
     private String sector;
@@ -24,7 +15,6 @@ public class CompanyBean {
     public CompanyBean() {
     }
 
-    
     public int getId() {
         return id;
     }
@@ -53,5 +43,4 @@ public class CompanyBean {
     public String toString() {
         return name;
     }
-    
 }

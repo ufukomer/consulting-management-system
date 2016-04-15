@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.consulting.management.system.bean;
 
-/**
- *
- * @author MelihKerman
- */
 public class PersonnelBean {
 
     private int id;
@@ -20,7 +11,8 @@ public class PersonnelBean {
     private int salary;
     private boolean isWorking;
 
-    public PersonnelBean(int id, String name, String surname, String email, String password, String role, int salary, boolean isWorking) {
+    public PersonnelBean(int id, String name, String surname, String email,
+                         String password, String role, int salary, boolean isWorking) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -98,13 +90,13 @@ public class PersonnelBean {
     public void setIsWorking(boolean isWorking) {
         this.isWorking = isWorking;
     }
-    
+
     @Override
     public String toString() {
         return "\n" + "name: " + name +
                 " surname: " + surname +
                 " email: " + email +
-                " password: " + password + 
+                " password: " + password +
                 " role: " + role +
                 " salary: " + salary +
                 " isWorking: " + isWorking;

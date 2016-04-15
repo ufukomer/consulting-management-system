@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.consulting.management.system.dao.imp;
 
 import com.mycompany.consulting.management.system.bean.CompanyBean;
 import com.mycompany.consulting.management.system.bean.ConnectionControlBean;
 import com.mycompany.consulting.management.system.dao.CompanyDao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,27 +12,23 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author MelihKerman
- */
 public class CompanyDaoIml implements CompanyDao {
 
     @Override
-    public CompanyBean getCompanyById(int id)throws ClassNotFoundException, SQLException {
-         ConnectionControlBean connection = new ConnectionControlBean();
+    public CompanyBean getCompanyById(int id) throws ClassNotFoundException, SQLException {
+        ConnectionControlBean connection = new ConnectionControlBean();
         Connection con = connection.getConnection();
-        CompanyBean companyBean=null;
+        CompanyBean companyBean = null;
         try {
 
-            String sql = "SELECT * FROM company WHERE id='"+id+"'";
+            String sql = "SELECT * FROM company WHERE id='" + id + "'";
 
-           Statement stmt=con.createStatement();
-           ResultSet rs=stmt.executeQuery(sql);
-           while(rs.next()){
-               companyBean=new CompanyBean(rs.getInt("id"),rs.getString("name"),rs.getString("sector"));
-           }
- 
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                companyBean = new CompanyBean(rs.getInt("id"), rs.getString("name"), rs.getString("sector"));
+            }
+
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         } finally {
@@ -46,28 +38,28 @@ public class CompanyDaoIml implements CompanyDao {
     }
 
     @Override
-    public List<CompanyBean> getAllCompanies()throws ClassNotFoundException, SQLException {
-        List<CompanyBean> companyList=new ArrayList<CompanyBean>();
-          ConnectionControlBean connection = new ConnectionControlBean();
+    public List<CompanyBean> getAllCompanies() throws ClassNotFoundException, SQLException {
+        List<CompanyBean> companyList = new ArrayList<CompanyBean>();
+        ConnectionControlBean connection = new ConnectionControlBean();
         Connection con = connection.getConnection();
         try {
 
             String sql = "SELECT * FROM company WHERE 1";
 
-           Statement stmt=con.createStatement();
-           ResultSet rs=stmt.executeQuery(sql);
-           while(rs.next()){
-               companyList.add(new CompanyBean(rs.getInt("id"),rs.getString("name"),rs.getString("sector")));
-           }
- 
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                companyList.add(new CompanyBean(rs.getInt("id"), rs.getString("name"), rs.getString("sector")));
+            }
+
         } catch (Exception ex) {
-         
+
         } finally {
             con.close();
         }
-        
-     return companyList;
-    
+
+        return companyList;
+
     }
 
     @Override
@@ -91,58 +83,55 @@ public class CompanyDaoIml implements CompanyDao {
         } finally {
             con.close();
         }
-        
-        return true; 
+
+        return true;
     }
 
     @Override
-    public CompanyBean getCompanyByName(String name)throws ClassNotFoundException, SQLException {
-           
+    public CompanyBean getCompanyByName(String name)
+            throws ClassNotFoundException, SQLException {
+
         ConnectionControlBean connection = new ConnectionControlBean();
-        Connection con = connection.getConnection();
-        CompanyBean companyBean=null;
-        try {
+        CompanyBean companyBean = null;
 
-            String sql = "SELECT * FROM company WHERE name='"+name+"'";
+        try (Connection con = connection.getConnection()) {
 
-           Statement stmt=con.createStatement();
-           ResultSet rs=stmt.executeQuery(sql);
-           while(rs.next()){
-               companyBean=new CompanyBean(rs.getInt("id"),rs.getString("name"),rs.getString("sector"));
-           }
- 
-        } catch (Exception ex) {
+            String sql = "SELECT * FROM company WHERE name='" + name + "'";
+
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                companyBean = new CompanyBean(rs.getInt("id"),
+                        rs.getString("name"), rs.getString("sector"));
+            }
+
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-        } finally {
-            con.close();
         }
+
         return companyBean;
-                
     }
 
     @Override
-    public CompanyBean getCompanyBySector(String sector)throws ClassNotFoundException, SQLException {
-            ConnectionControlBean connection = new ConnectionControlBean();
-        Connection con = connection.getConnection();
-        CompanyBean companyBean=null;
-        try {
+    public CompanyBean getCompanyBySector(String sector)
+            throws ClassNotFoundException, SQLException {
 
-            String sql = "SELECT * FROM company WHERE sector='"+sector+"'";
+        ConnectionControlBean connection = new ConnectionControlBean();
+        CompanyBean companyBean = null;
 
-           Statement stmt=con.createStatement();
-           ResultSet rs=stmt.executeQuery(sql);
-           while(rs.next()){
-               companyBean=new CompanyBean(rs.getInt("id"),rs.getString("name"),rs.getString("sector"));
-           }
- 
+        try (Connection con = connection.getConnection()) {
+            String sql = "SELECT * FROM company WHERE sector='" + sector + "'";
+
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                companyBean = new CompanyBean(rs.getInt("id"), rs.getString("name"), rs.getString("sector"));
+            }
+
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
-        } finally {
-            con.close();
         }
+
         return companyBean;
     }
-
-   
-
 }

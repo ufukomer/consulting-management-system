@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.consulting.management.system.dao;
 
 import com.mycompany.consulting.management.system.bean.PersonnelBean;
 import java.util.List;
 
-/**
- *
- * @author MelihKerman
- */
 public interface PersonnelDao {
 
     boolean addPersonnel(PersonnelBean personnelBean);
@@ -36,11 +27,11 @@ public interface PersonnelDao {
     
     boolean setPersonnelProjectOperation(int projectId, String role, int requestCount);
     
-    public List<PersonnelBean> getAllActivePersonnel();
+    List<PersonnelBean> getAllActivePersonnel();
     
-    public List<PersonnelBean> getAllPassivePersonnel();
+    List<PersonnelBean> getAllPassivePersonnel();
     
-    public boolean isPersonnelActive(int id);
+    boolean isPersonnelActive(int id);
     
-    public List<PersonnelBean> getAllPersonnelByProjectId(int projectId);
+    List<PersonnelBean> getAllPersonnelByProjectId(int projectId);
 }

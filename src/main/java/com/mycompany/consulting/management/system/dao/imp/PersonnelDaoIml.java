@@ -3,6 +3,7 @@ package com.mycompany.consulting.management.system.dao.imp;
 import com.mycompany.consulting.management.system.bean.ConnectionControlBean;
 import com.mycompany.consulting.management.system.bean.PersonnelBean;
 import com.mycompany.consulting.management.system.dao.PersonnelDao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,15 +13,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- *
- * @author MelihKerman
- */
 public class PersonnelDaoIml implements PersonnelDao {
 
     private static final Logger logger = Logger.getLogger(PersonnelDaoIml.class.getName());
@@ -29,20 +21,20 @@ public class PersonnelDaoIml implements PersonnelDao {
     private ResultSet rs;
 
     public PersonnelDaoIml() {
-       
     }
 
     @Override
     public boolean addPersonnel(PersonnelBean personnelBean) {
-        
+
         boolean isInsert = false;
+
         try {
             conn = new ConnectionControlBean().getConnection();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
         }
-        try {
 
+        try {
             String sql = "insert into personnel (name , surname, email, "
                     + "password, role, salary, isWorking) values(?,?,?,?,?,?,?)";
 
@@ -83,6 +75,7 @@ public class PersonnelDaoIml implements PersonnelDao {
     public PersonnelBean getPersonnelById(int id) {
 
         PersonnelBean personnelBean = null;
+
         try {
             conn = new ConnectionControlBean().getConnection();
         } catch (ClassNotFoundException ex) {
@@ -274,7 +267,7 @@ public class PersonnelDaoIml implements PersonnelDao {
         }
         return personnelList;
     }
-    
+
     @Override
     public List<PersonnelBean> getAllActivePersonnel() {
 
@@ -319,7 +312,7 @@ public class PersonnelDaoIml implements PersonnelDao {
         }
         return personnelList;
     }
-    
+
     @Override
     public List<PersonnelBean> getAllPassivePersonnel() {
 
@@ -502,14 +495,10 @@ public class PersonnelDaoIml implements PersonnelDao {
 
         return isWorking;
     }
-    
- 
-   
-    
 
     @Override
     public boolean setPersonnelProjectOperation(int projectId, String role, int requestCount) {
-        
+
         try {
             List<PersonnelBean> personnelList = getFreePersonnelByRole(role);
             for (int i = 0; i < requestCount; i++) {
@@ -527,8 +516,9 @@ public class PersonnelDaoIml implements PersonnelDao {
 
     @Override
     public boolean isPersonnelActive(int id) {
-        
+
         boolean isWorking = false;
+
         try {
             conn = new ConnectionControlBean().getConnection();
             logger.info("Started the getting project from database");
@@ -537,7 +527,7 @@ public class PersonnelDaoIml implements PersonnelDao {
             prestmt = conn.prepareStatement(getProjectSql);
             prestmt.setInt(1, id);
             rs = prestmt.executeQuery();
-            
+
             while (rs.next()) {
                 isWorking = rs.getBoolean("isWorking");
             }
@@ -557,19 +547,22 @@ public class PersonnelDaoIml implements PersonnelDao {
                 Logger.getLogger(ProjectDaoIml.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+
         return isWorking;
     }
 
     @Override
     public List<PersonnelBean> getAllPersonnelByProjectId(int projectId) {
+
         List<PersonnelBean> personnelList = new ArrayList<>();
+
         try {
             conn = new ConnectionControlBean().getConnection();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
         }
-        try {
 
+        try {
             String sql = "select * from personnel where projectId='" + projectId + "'";
             prestmt = conn.prepareStatement(sql);
             rs = prestmt.executeQuery(sql);

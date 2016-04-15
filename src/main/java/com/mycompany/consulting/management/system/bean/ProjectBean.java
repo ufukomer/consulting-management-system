@@ -1,35 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.consulting.management.system.bean;
 
 import java.util.Date;
 
-/**
- *
- * @author Ufuk
- */
 public class ProjectBean {
-    
+
     private int id;
     private String name;
     private String sector;
     private int minimumPersonelNumber;
     private int maximumPersonelNumber;
-    
+
     private Date startedDate;
     private Date endedDate;
-    
+
     private int projectManagerNumber;
     private int analystNumber;
     private int designerNumber;
     private int developerNumber;
     private int testerNumber;
-    
+
     private boolean readyToStart;
-    
+
     public ProjectBean() {
     }
 
@@ -96,7 +87,7 @@ public class ProjectBean {
     public void setTesterNumber(int testerNumber) {
         this.testerNumber = testerNumber;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -139,9 +130,8 @@ public class ProjectBean {
 
     @Override
     public String toString() {
-        return "Project{ \n id:"+getId()+"\n"+
-                "name: "+getName()+"\n"+
-                "sector: "+getSector()+"\n }";
+        return "Project{ \n id:" + getId() + "\n" +
+                "name: " + getName() + "\n" +
+                "sector: " + getSector() + "\n }";
     }
-    
 }

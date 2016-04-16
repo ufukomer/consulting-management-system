@@ -21,6 +21,8 @@ public interface ProjectDao {
 
     List<ProjectBean> getAllActiveProject();
 
+    boolean projectDeactivateOperation(int projectId);
+
     boolean projectRoleOperation(int projectId);
 
     boolean updateProjectStatus(int projectId, boolean updateStatus);

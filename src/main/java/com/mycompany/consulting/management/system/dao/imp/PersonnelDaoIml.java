@@ -454,6 +454,11 @@ public class PersonnelDaoIml implements PersonnelDao {
     }
 
     @Override
+    public boolean getPersonnelByProjectId(int projectId) {
+        return false;
+    }
+
+    @Override
     public boolean getPersonnelWorkingStateByEmail(String email) {
 
         boolean isWorking = true;
@@ -494,6 +499,17 @@ public class PersonnelDaoIml implements PersonnelDao {
         }
 
         return isWorking;
+    }
+
+    @Override
+    public boolean setPersonnelDeactivateOperation(int projectId) {
+
+        List<PersonnelBean> personnelBeanList = getAllPersonnelByProjectId(projectId);
+
+        // TODO DENE!
+        System.out.println(personnelBeanList);
+
+        return true;
     }
 
     @Override
@@ -553,15 +569,12 @@ public class PersonnelDaoIml implements PersonnelDao {
 
     @Override
     public List<PersonnelBean> getAllPersonnelByProjectId(int projectId) {
-
         List<PersonnelBean> personnelList = new ArrayList<>();
-
         try {
             conn = new ConnectionControlBean().getConnection();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(PersonnelDaoIml.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         try {
             String sql = "select * from personnel where projectId='" + projectId + "'";
             prestmt = conn.prepareStatement(sql);

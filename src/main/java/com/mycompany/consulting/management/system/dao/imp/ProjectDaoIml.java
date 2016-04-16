@@ -310,6 +310,36 @@ public class ProjectDaoIml implements ProjectDao {
     }
 
     @Override
+    public boolean projectDeactivateOperation(int projectId) {
+
+        PersonnelService personnelService = new PersonnelService();
+        ProjectService projectService = new ProjectService();
+
+        try {
+            ProjectBean projectBean = getProjectById(projectId);
+
+            String getPersonnelByProjectId = "Select * from personnel where projectid = " + projectId;
+            prestmt = conn.prepareStatement(getPersonnelByProjectId);
+            result = prestmt.executeQuery();
+
+            while (result.next()) {
+
+            }
+
+            projectService.updateProjectStatus(projectId, false);
+
+
+        } catch (Exception ex) {
+            logger.warning("ProjectDeactivateOperation error with Project Id: "
+                    + projectId + " Message:" + ex.getMessage());
+            return false;
+        }
+
+
+        return true;
+    }
+
+    @Override
     public boolean projectRoleOperation(int projectId) {
 
         PersonnelService personnelService = new PersonnelService();
@@ -321,7 +351,6 @@ public class ProjectDaoIml implements ProjectDao {
             int designerCount = personnelService.getFreePersonnelByRole("Designer").size();
             int developerCount = personnelService.getFreePersonnelByRole("Developer").size();
             int testerCount = personnelService.getFreePersonnelByRole("Tester").size();
-
 
             ProjectBean projectBean = getProjectById(projectId);
 
@@ -350,8 +379,8 @@ public class ProjectDaoIml implements ProjectDao {
 
         } catch (Exception ex) {
             logger.warning("ProjectRoleOperation error with Project Id: " + projectId + " Message:" + ex.getMessage());
-            return false;
         }
+
         return true;
     }
 
